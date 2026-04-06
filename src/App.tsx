@@ -16,6 +16,7 @@ import Training from "./pages/Training";
 import Testimonials from "./pages/Testimonials";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import BookAppointment from "./pages/BookAppointment";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
