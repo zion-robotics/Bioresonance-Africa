@@ -17,7 +17,7 @@ export default function Contact() {
     { icon: MapPin, label: "Address", value: "Lagos, Nigeria" },
     { icon: Phone, label: "Phone", value: "+234 803 303 0614", href: "tel:+2348033030614" },
     { icon: MessageCircle, label: "WhatsApp", value: "+234 803 303 0614", href: "https://wa.me/2348033030614" },
-    { icon: Mail, label: "Email", value: "info@bioresonancenigeria.com", href: "mailto:info@bioresonancenigeria.com" },
+    { icon: Mail, label: "Email", value: "1stbionic@gmail.com", href: "mailto:1stbionic@gmail.com" },
   ];
 
   return (

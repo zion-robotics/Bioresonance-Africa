@@ -58,6 +58,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="mailto:1stbionic@gmail.com" className="hover:text-gold transition-colors">
+                  1stbionic@gmail.com
+                </a>
+              </li>
+              <li>
                 <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
                   WhatsApp
                 </a>

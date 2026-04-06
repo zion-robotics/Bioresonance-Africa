@@ -39,6 +39,7 @@ function AnimatedRoutes() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
