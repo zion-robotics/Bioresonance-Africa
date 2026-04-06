@@ -4,6 +4,8 @@ import { useCounter } from "@/hooks/useCounter";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
+import DNAHelix from "@/components/DNAHelix";
 import { Shield, Zap, Radio, Globe, Microscope, HeartPulse, ChevronRight, ArrowRight } from "lucide-react";
 
 import heroImg from "@/assets/hero_medical.jpg";
@@ -104,6 +106,11 @@ export default function Index() {
 
   return (
     <PageTransition>
+      <SEOHead
+        title="Bioresonance Nigeria — The Holy Grail of Healing© | Bionic© & Biopita©"
+        description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 144+ conditions treated with digital frequency medicine by Oludele SKO."
+        path="/"
+      />
       {/* HERO */}
       <section className="relative min-h-screen flex items-center bg-navy overflow-hidden">
         {/* Background image */}
@@ -229,22 +236,19 @@ export default function Index() {
               </motion.div>
             </div>
 
-            {/* Hero image side */}
+            {/* DNA Helix Animation */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 1.2, ease: "easeOut" }}
-              className="hidden lg:block relative"
+              className="hidden lg:flex relative items-center justify-center"
             >
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-gold/20 via-deep-blue/20 to-transparent rounded-3xl blur-2xl" />
-                <img
-                  src={heroImg}
-                  alt="Bioresonance frequency healing technology"
-                  className="relative rounded-2xl w-full object-cover shadow-2xl shadow-deep-blue/30"
-                  width={1920}
-                  height={1080}
-                />
+              <div className="relative w-full h-[520px]">
+                {/* Glow background behind DNA */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-deep-blue/10 to-transparent rounded-3xl blur-2xl" />
+                <div className="relative h-full w-full">
+                  <DNAHelix />
+                </div>
                 {/* Floating badge */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}

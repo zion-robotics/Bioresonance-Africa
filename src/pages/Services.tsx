@@ -3,6 +3,7 @@ import { Search, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { conditions } from "@/data/conditions";
 import helpImg from "@/assets/help.jpeg";
 import roadImg from "@/assets/road.jpeg";
@@ -77,6 +78,7 @@ export default function Services() {
 
   return (
     <PageTransition>
+      <SEOHead title="Services" description="144+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." path="/services" />
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { ShoppingCart } from "lucide-react";
 
 import metaHunter from "@/assets/meta_hunter.jpeg";
@@ -37,6 +38,7 @@ const products = [
 export default function Products() {
   return (
     <PageTransition>
+      <SEOHead title="Products" description="Professional-grade NLS Meta Hunter 4025, Remote Black Box Bundle, and Energy Trapper. Precision tools for bioresonance healers." path="/products" />
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
