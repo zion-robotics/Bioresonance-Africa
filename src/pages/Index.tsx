@@ -118,9 +118,10 @@ export default function Index() {
           <img
             src={heroImg}
             alt="Bioresonance frequency medicine"
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-60"
             width={1920}
             height={1080}
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(228,80%,6%)] via-[hsl(228,80%,6%/0.85)] to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[hsl(228,80%,6%)] via-transparent to-[hsl(228,80%,6%/0.3)]" />

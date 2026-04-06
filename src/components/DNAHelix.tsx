@@ -1,120 +1,124 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export default function DNAHelix() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const timeRef = useRef(0);
 
-  useEffect(() => {
+  const draw = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animId: number;
-    let time = 0;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const w = rect.width;
+    const h = rect.height;
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener("resize", resize);
+    if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+    }
 
-    const W = () => canvas.offsetWidth;
-    const H = () => canvas.offsetHeight;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    timeRef.current += 0.015;
+    const time = timeRef.current;
 
-    const draw = () => {
-      ctx.clearRect(0, 0, W(), H());
-      time += 0.012;
+    const cx = w / 2;
+    const numNodes = 30;
+    const spacing = h / (numNodes - 1);
+    const amplitude = Math.min(w * 0.22, 90);
 
-      const cx = W() / 2;
-      const numNodes = 28;
-      const spacing = H() / (numNodes - 1);
-      const amplitude = Math.min(W() * 0.18, 80);
+    // Rungs
+    for (let i = 0; i < numNodes; i++) {
+      const y = i * spacing;
+      const phase = i * 0.42 + time * 2.5;
+      const x1 = cx + Math.sin(phase) * amplitude;
+      const x2 = cx + Math.sin(phase + Math.PI) * amplitude;
+      const depth = Math.cos(phase);
 
-      // Draw connecting rungs first (behind strands)
-      for (let i = 0; i < numNodes; i++) {
-        const y = i * spacing;
-        const phase = i * 0.45 + time * 3;
-        const x1 = cx + Math.sin(phase) * amplitude;
-        const x2 = cx + Math.sin(phase + Math.PI) * amplitude;
-        const depth = Math.cos(phase);
-
-        if (i % 2 === 0) {
-          ctx.beginPath();
-          ctx.moveTo(x1, y);
-          ctx.lineTo(x2, y);
-          const alpha = 0.15 + Math.abs(depth) * 0.15;
-          ctx.strokeStyle = `rgba(234, 179, 8, ${alpha})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
-      }
-
-      // Draw two helix strands
-      for (let strand = 0; strand < 2; strand++) {
-        const phaseOffset = strand * Math.PI;
-
+      if (i % 2 === 0) {
+        const alpha = 0.12 + Math.abs(depth) * 0.2;
         ctx.beginPath();
-        for (let i = 0; i < numNodes; i++) {
-          const y = i * spacing;
-          const phase = i * 0.45 + time * 3 + phaseOffset;
-          const x = cx + Math.sin(phase) * amplitude;
-
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        const gradient = ctx.createLinearGradient(0, 0, 0, H());
-        gradient.addColorStop(0, strand === 0 ? "rgba(27, 63, 123, 0.7)" : "rgba(234, 179, 8, 0.5)");
-        gradient.addColorStop(0.5, strand === 0 ? "rgba(27, 63, 123, 0.9)" : "rgba(234, 179, 8, 0.8)");
-        gradient.addColorStop(1, strand === 0 ? "rgba(27, 63, 123, 0.4)" : "rgba(234, 179, 8, 0.3)");
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 2.5;
+        ctx.moveTo(x1, y);
+        ctx.lineTo(x2, y);
+        ctx.strokeStyle = `rgba(234, 179, 8, ${alpha})`;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Draw nodes
-        for (let i = 0; i < numNodes; i++) {
-          const y = i * spacing;
-          const phase = i * 0.45 + time * 3 + phaseOffset;
-          const x = cx + Math.sin(phase) * amplitude;
-          const depth = Math.cos(phase);
-          const size = 2.5 + Math.abs(depth) * 2;
-          const alpha = 0.4 + Math.abs(depth) * 0.6;
-
-          ctx.beginPath();
-          ctx.arc(x, y, size, 0, Math.PI * 2);
-          ctx.fillStyle = strand === 0
-            ? `rgba(27, 63, 123, ${alpha})`
-            : `rgba(234, 179, 8, ${alpha})`;
-          ctx.fill();
-
-          // Glow effect on foreground nodes
-          if (Math.abs(depth) > 0.7) {
-            ctx.beginPath();
-            ctx.arc(x, y, size + 4, 0, Math.PI * 2);
-            ctx.fillStyle = strand === 0
-              ? `rgba(27, 63, 123, ${alpha * 0.15})`
-              : `rgba(234, 179, 8, ${alpha * 0.15})`;
-            ctx.fill();
-          }
-        }
+        // Base pair dots
+        const mx = (x1 + x2) / 2;
+        ctx.beginPath();
+        ctx.arc(mx, y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(234, 179, 8, ${alpha * 0.5})`;
+        ctx.fill();
       }
+    }
 
-      animId = requestAnimationFrame(draw);
-    };
+    // Two helix strands
+    for (let strand = 0; strand < 2; strand++) {
+      const phaseOffset = strand * Math.PI;
+      const colors = strand === 0
+        ? ["27, 63, 123", "27, 100, 180"]
+        : ["234, 179, 8", "255, 200, 50"];
 
-    draw();
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
+      // Smooth curve
+      ctx.beginPath();
+      for (let i = 0; i <= numNodes * 4; i++) {
+        const t = i / (numNodes * 4);
+        const y = t * h;
+        const nodePhase = t * numNodes * 0.42 + time * 2.5 + phaseOffset;
+        const x = cx + Math.sin(nodePhase) * amplitude;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, `rgba(${colors[0]}, 0.3)`);
+      grad.addColorStop(0.3, `rgba(${colors[1]}, 0.85)`);
+      grad.addColorStop(0.7, `rgba(${colors[1]}, 0.85)`);
+      grad.addColorStop(1, `rgba(${colors[0]}, 0.3)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Nodes with glow
+      for (let i = 0; i < numNodes; i++) {
+        const y = i * spacing;
+        const phase = i * 0.42 + time * 2.5 + phaseOffset;
+        const x = cx + Math.sin(phase) * amplitude;
+        const depth = Math.cos(phase);
+        const size = 3 + Math.abs(depth) * 2.5;
+        const alpha = 0.4 + Math.abs(depth) * 0.6;
+
+        // Outer glow
+        if (Math.abs(depth) > 0.5) {
+          ctx.beginPath();
+          ctx.arc(x, y, size + 6, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${colors[1]}, ${alpha * 0.08})`;
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${colors[1]}, ${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    animRef.current = requestAnimationFrame(draw);
   }, []);
+
+  useEffect(() => {
+    animRef.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [draw]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="w-full h-full"
-      style={{ display: "block" }}
+      style={{ width: "100%", height: "100%", display: "block" }}
       aria-hidden="true"
     />
   );
