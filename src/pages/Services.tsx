@@ -3,6 +3,7 @@ import { Search, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { conditions } from "@/data/conditions";
 import helpImg from "@/assets/help.jpeg";
 import roadImg from "@/assets/road.jpeg";

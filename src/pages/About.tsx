@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { Target, Eye, Building, Building2, Layers } from "lucide-react";
 import frequencyHeart from "@/assets/frequency_heart.jpeg";
 import clinicImg from "@/assets/clinic.jpeg";
@@ -7,6 +8,7 @@ import clinicImg from "@/assets/clinic.jpeg";
 export default function About() {
   return (
     <PageTransition>
+      <SEOHead title="About" description="Learn about Bionic© and Biopita© — Africa's first bioresonance medical brand founded by Oludele SKO, the 1st Bioresonanceist of Africa©." path="/about" />
       {/* Hero */}
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

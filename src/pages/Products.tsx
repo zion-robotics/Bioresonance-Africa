@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { ShoppingCart } from "lucide-react";
 
 import metaHunter from "@/assets/meta_hunter.jpeg";
