@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollToTop from "@/components/ScrollToTop";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -16,6 +17,7 @@ import Training from "./pages/Training";
 import Testimonials from "./pages/Testimonials";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import BookAppointment from "./pages/BookAppointment";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
@@ -38,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
@@ -53,6 +56,7 @@ const App = () => (
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <AnimatedRoutes />
         <Footer />

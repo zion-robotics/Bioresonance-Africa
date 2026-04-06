@@ -1,6 +1,8 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { Target, Eye, Building, Building2, Layers } from "lucide-react";
+import frequencyHeart from "@/assets/frequency_heart.jpeg";
+import clinicImg from "@/assets/clinic.jpeg";
 
 export default function About() {
   return (
@@ -22,28 +24,51 @@ export default function About() {
 
       {/* The Bionic Story */}
       <section className="section-padding bg-light-blue">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="flex items-center gap-3 mb-6">
-              <Building className="text-deep-blue" size={28} />
-              <h2 className="heading-display text-3xl md:text-4xl text-foreground">The Bionic© Story</h2>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <div className="space-y-5 text-foreground/70 font-body leading-relaxed">
-              <p>Bionic©, a refined version of the bioresonance clinic, was established as a direct response to the limitations of symptom-driven medicine. The prevailing system manages conditions, sustains dependency, and rarely confronts the true origin of disease. Bionic© introduces a precise natural alternative.</p>
-              <p>Built on bioresonance, the Holy Grail of Healing©, it recognises disease as an energetic distortion before it manifests physically. This enables targeted identification and correction at the root level.</p>
-              <p>Founded and pioneered by Oludele Sunday Kolawole Olumide (aka Oludele SKO), Bionic© represents a structured shift from management to resolution, from chemical reliance to intelligent frequency intervention.</p>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <Building className="text-deep-blue" size={28} />
+                  <h2 className="heading-display text-3xl md:text-4xl text-foreground">The Bionic© Story</h2>
+                </div>
+                <div className="space-y-5 text-foreground/70 font-body leading-relaxed">
+                  <p>Bionic©, a refined version of the bioresonance clinic, was established as a direct response to the limitations of symptom-driven medicine. The prevailing system manages conditions, sustains dependency, and rarely confronts the true origin of disease. Bionic© introduces a precise natural alternative.</p>
+                  <p>Built on bioresonance, the Holy Grail of Healing©, it recognises disease as an energetic distortion before it manifests physically. This enables targeted identification and correction at the root level.</p>
+                  <p>Founded and pioneered by Oludele Sunday Kolawole Olumide (aka Oludele SKO), Bionic© represents a structured shift from management to resolution, from chemical reliance to intelligent frequency intervention.</p>
+                </div>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img src={clinicImg} alt="From Clinic to Bionic - the new era of healthcare" className="w-full h-80 object-cover" loading="lazy" />
+              </div>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* How It Works - Frequency Diagram */}
       <section className="section-padding bg-card">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-8">
+              <h2 className="heading-display text-3xl text-foreground mb-4">How Bioresonance Works</h2>
+              <p className="text-foreground/60 font-body">Understanding frequency distortion and restoration</p>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-border">
+              <img src={frequencyHeart} alt="Healthy vs Distorted vs Restored Frequency" className="w-full h-auto object-cover" loading="lazy" />
+            </div>
+            <p className="text-sm text-muted-foreground font-body text-center mt-4 italic">
+              Every disease begins as a distortion in frequency. Bioresonance identifies and restores the body's natural frequency balance.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="section-padding bg-light-blue">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
           <ScrollReveal>
-            <div className="bg-light-blue rounded-2xl p-8 h-full border border-border">
+            <div className="bg-card rounded-2xl p-8 h-full border border-border shadow-sm">
               <Target className="text-deep-blue mb-4" size={32} />
               <h3 className="heading-display text-2xl text-foreground mb-4">Mission</h3>
               <p className="text-foreground/70 font-body leading-relaxed">
@@ -64,7 +89,7 @@ export default function About() {
       </section>
 
       {/* Bionic Further Explained */}
-      <section className="section-padding bg-light-blue">
+      <section className="section-padding bg-card">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-6">
@@ -76,18 +101,16 @@ export default function About() {
             <div className="space-y-5 text-foreground/70 font-body leading-relaxed">
               <p>Bionic© is a specialised version of the bioresonance clinic, engineered for precision intervention. At Bionic©:</p>
               <ul className="space-y-3 ml-4">
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  The body's energetic signals are scanned and interpreted in a clear and common language.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  Hidden distortions are identified before physical manifestation.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  Corrective frequencies are deployed to restore balance at the source.
-                </li>
+                {[
+                  "The body's energetic signals are scanned and interpreted in a clear and common language.",
+                  "Hidden distortions are identified before physical manifestation.",
+                  "Corrective frequencies are deployed to restore balance at the source.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
               </ul>
               <p>It is not positioned as wellness. It is a focused, high-precision environment for root-cause correction using digital frequency medicine.</p>
             </div>
@@ -96,7 +119,7 @@ export default function About() {
       </section>
 
       {/* Biopita Explained */}
-      <section className="section-padding bg-card">
+      <section className="section-padding bg-light-blue">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-6">
@@ -108,18 +131,16 @@ export default function About() {
             <div className="space-y-5 text-foreground/70 font-body leading-relaxed">
               <p>Biopita© is a structured version of a bioresonance hospital, designed for scale, coordination, and advanced care delivery. At Biopita©:</p>
               <ul className="space-y-3 ml-4">
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  Multiple Bionic© units operate within an integrated system.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  Complex and advanced conditions are addressed comprehensively and intensively.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
-                  Continuous monitoring and structured healing pathways are implemented.
-                </li>
+                {[
+                  "Multiple Bionic© units operate within an integrated system.",
+                  "Complex and advanced conditions are addressed comprehensively and intensively.",
+                  "Continuous monitoring and structured healing pathways are implemented.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-deep-blue mt-2 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
               </ul>
               <p>Biopita© represents the institutional expansion of bioresonance, the Holy Grail of Healing©, delivering organised, high-capacity, frequency-based healthcare.</p>
             </div>
