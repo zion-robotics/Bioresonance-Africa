@@ -56,6 +56,7 @@ const App = () => (
     <TooltipProvider>
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <AnimatedRoutes />
         <Footer />
