@@ -4,6 +4,8 @@ import { useCounter } from "@/hooks/useCounter";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
+import DNAHelix from "@/components/DNAHelix";
 import { Shield, Zap, Radio, Globe, Microscope, HeartPulse, ChevronRight, ArrowRight } from "lucide-react";
 
 import heroImg from "@/assets/hero_medical.jpg";
