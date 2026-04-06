@@ -63,7 +63,7 @@ const App = () => (
           <Navbar />
           <AnimatedRoutes />
           <Footer />
-          <WhatsAppButton />
+          
           <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
