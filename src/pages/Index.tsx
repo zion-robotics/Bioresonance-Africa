@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import SEOHead from "@/components/SEOHead";
-import DNAHelix from "@/components/DNAHelix";
 import { Shield, Zap, Radio, Globe, Microscope, HeartPulse, ChevronRight, ArrowRight } from "lucide-react";
 
 import heroImg from "@/assets/hero_medical.jpg";
@@ -94,6 +93,44 @@ function FloatingParticles() {
         />
       ))}
     </div>
+  );
+}
+
+// Animated button with shimmer + pulse
+function AnimatedHeroButton({ to, children, variant = "accent", delay = 0 }: { to: string; children: React.ReactNode; variant?: "accent" | "primary"; delay?: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6 }}
+    >
+      <Link to={to} className="relative group block">
+        <motion.div
+          whileHover={{ scale: 1.05, y: -3 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          className={`relative overflow-hidden text-center text-lg ${
+            variant === "accent" ? "btn-accent-brand" : "btn-primary-brand border border-navy-foreground/20"
+          }`}
+        >
+          {/* Shimmer overlay */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+            animate={{ x: ["-200%", "200%"] }}
+            transition={{ duration: 3, repeat: Infinity, delay: delay + 1, ease: "easeInOut" }}
+          />
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            {children}
+            <motion.span
+              animate={{ x: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight size={18} />
+            </motion.span>
+          </span>
+        </motion.div>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -186,41 +223,14 @@ export default function Index() {
                 Bioresonance, the Holy Grail of Healing© is a revolutionary digital, electronic and electromagnetic medicine system that identifies and neutralises root causes using energy, frequency, and intelligent resonance.
               </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 5, duration: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4 mb-8"
-              >
-                <Link to="/book-appointment" className="btn-accent-brand text-center text-lg group relative overflow-hidden">
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Book Appointment
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowRight size={18} />
-                    </motion.span>
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-[hsl(45,100%,60%)]"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-                <Link to="/services" className="btn-primary-brand text-center text-lg group relative overflow-hidden border border-navy-foreground/20">
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Get Started Today
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                    >
-                      <ArrowRight size={18} />
-                    </motion.span>
-                  </span>
-                </Link>
-              </motion.div>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <AnimatedHeroButton to="/book-appointment" variant="accent" delay={5}>
+                  Book Appointment
+                </AnimatedHeroButton>
+                <AnimatedHeroButton to="/services" variant="primary" delay={5.2}>
+                  Get Started Today
+                </AnimatedHeroButton>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0 }}
@@ -237,18 +247,23 @@ export default function Index() {
               </motion.div>
             </div>
 
-            {/* DNA Helix Animation */}
+            {/* Right side - hero image showcase */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 1.2, ease: "easeOut" }}
               className="hidden lg:flex relative items-center justify-center"
             >
               <div className="relative w-full h-[520px]">
-                {/* Glow background behind DNA */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-deep-blue/10 to-transparent rounded-3xl blur-2xl" />
-                <div className="relative h-full w-full">
-                  <DNAHelix />
+                <div className="relative h-full w-full rounded-3xl overflow-hidden border border-gold/10">
+                  <img
+                    src={heroImg}
+                    alt="Bioresonance frequency medicine visualization"
+                    className="w-full h-full object-cover"
+                    fetchPriority="high"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
                 </div>
                 {/* Floating badge */}
                 <motion.div
@@ -313,7 +328,6 @@ export default function Index() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              {/* Frequency Heart Diagram */}
               <div className="rounded-2xl overflow-hidden shadow-xl border border-border mb-8">
                 <img
                   src={frequencyHeart}
@@ -365,14 +379,14 @@ export default function Index() {
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal delay={0.1}>
-              <div className="rounded-2xl overflow-hidden card-hover">
+              <motion.div whileHover={{ y: -6 }} className="rounded-2xl overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-2xl">
                 <img src={changeImg} alt="Transformation through bioresonance" className="w-full h-80 object-cover" loading="lazy" />
-              </div>
+              </motion.div>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
-              <div className="rounded-2xl overflow-hidden card-hover">
+              <motion.div whileHover={{ y: -6 }} className="rounded-2xl overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-2xl">
                 <img src={pareImg} alt="From Patienthood to Survivorhood" className="w-full h-80 object-cover" loading="lazy" />
-              </div>
+              </motion.div>
             </ScrollReveal>
           </div>
         </div>
@@ -398,117 +412,82 @@ export default function Index() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <Link to="/services" className="btn-primary-brand inline-flex items-center gap-2">
-              View All 144+ Conditions <ChevronRight size={18} />
+            <Link to="/services" className="btn-accent-brand inline-flex items-center gap-2 text-lg group">
+              See All 144+ Conditions
+              <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* PRODUCTS PREVIEW */}
-      <section className="section-padding bg-navy">
+      {/* PRODUCTS */}
+      <section className="section-padding bg-card">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <span className="text-sm font-body font-medium text-gold uppercase tracking-widest">Products</span>
-              <h2 className="heading-display text-3xl md:text-4xl text-navy-foreground mt-3">
-                Professional-Grade Equipment
+              <span className="text-sm font-body font-medium text-deep-blue uppercase tracking-widest">Shop</span>
+              <h2 className="heading-display text-3xl md:text-4xl text-foreground mt-3">
+                Professional Bioresonance Equipment
               </h2>
             </div>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {products.map((p, i) => (
-              <ScrollReveal key={p.name} delay={i * 0.15}>
-                <Link
-                  to={`/products/${p.id}`}
-                  className="group block bg-navy-foreground/5 rounded-2xl border border-navy-foreground/10 overflow-hidden card-hover"
-                >
-                  <div className="h-56 overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-heading font-semibold text-navy-foreground text-lg mb-2">{p.name}</h3>
-                    <p className="text-sm text-navy-foreground/50 font-body mb-3">{p.desc}</p>
-                    <span className="text-gold font-heading font-bold text-xl">{p.price}</span>
-                  </div>
+            {products.map((product, i) => (
+              <ScrollReveal key={product.id} delay={i * 0.1}>
+                <Link to={`/products/${product.id}`}>
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="bg-light-blue rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-shadow duration-500"
+                  >
+                    <div className="h-56 overflow-hidden">
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-heading font-bold text-lg text-foreground mb-2">{product.name}</h3>
+                      <p className="text-sm text-foreground/60 font-body mb-3">{product.desc}</p>
+                      <p className="text-xl font-heading font-bold text-deep-blue">{product.price}</p>
+                    </div>
+                  </motion.div>
                 </Link>
               </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal delay={0.3}>
+            <div className="text-center mt-12">
+              <Link to="/products" className="btn-primary-brand inline-flex items-center gap-2 text-lg group">
+                View All Products
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-navy relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(218_72%_30%/0.2),transparent_70%)]" />
-        <FloatingParticles />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <section className="bg-navy section-padding text-center relative overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gold/5 blur-[100px]"
+        />
+        <div className="relative z-10 max-w-3xl mx-auto">
           <ScrollReveal>
-            <h2 className="heading-display text-3xl md:text-4xl lg:text-5xl text-navy-foreground mb-6">
-              Stop Managing Symptoms. Start Eliminating Causes with customised precision.
+            <h2 className="heading-display text-3xl md:text-4xl text-navy-foreground mb-4">
+              Ready to Decode Your Health?
             </h2>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <p className="text-lg text-gold font-display italic mb-8">
-              Others are not trained to explain our modality.
+            <p className="text-navy-foreground/60 font-body text-lg mb-10">
+              Take the first step towards root-cause healing. No drugs. No surgery. Just frequency.
             </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.2}>
-            <ul className="space-y-3 text-navy-foreground/70 font-body text-left max-w-xl mx-auto mb-10">
-              {[
-                "Book Your Full Body/Comprehensive Frequency Scan",
-                "Join the Bioresonance Experience",
-                "Access the New Era of Healing",
-                "Every delay allows internal distortion to deepen. Act now.",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <ChevronRight size={16} className="text-gold mt-1 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.3}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <Link to="/book-appointment" className="btn-accent-brand text-center text-lg group relative overflow-hidden">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Book Appointment
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight size={18} />
-                  </motion.span>
-                </span>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/book-appointment" className="btn-accent-brand text-center text-lg">
+                Book Your Appointment
               </Link>
-              <Link to="/services" className="btn-primary-brand text-center text-lg border border-navy-foreground/20 group relative overflow-hidden">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Get Started Today
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-                  >
-                    <ArrowRight size={18} />
-                  </motion.span>
-                </span>
+              <Link to="/contact" className="btn-primary-brand text-center text-lg border border-navy-foreground/20">
+                Contact Us
               </Link>
-            </div>
-            <div className="flex items-center justify-center gap-6 flex-wrap">
-              {["Safe", "Precise", "Root-cause driven"].map((t) => (
-                <span key={t} className="flex items-center gap-2 text-sm text-navy-foreground/40 font-body">
-                  <Shield size={14} className="text-gold" />
-                  {t}
-                </span>
-              ))}
             </div>
           </ScrollReveal>
         </div>

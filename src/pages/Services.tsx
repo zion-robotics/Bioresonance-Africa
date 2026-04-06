@@ -22,42 +22,56 @@ function ConditionCard({ condition }: { condition: { name: string; desc: string;
   return (
     <motion.div
       layout
-      className="bg-light-blue rounded-xl border border-border overflow-hidden hover:shadow-md transition-shadow duration-300"
+      className={`rounded-2xl border overflow-hidden transition-all duration-500 ${
+        expanded
+          ? "bg-card shadow-xl border-deep-blue/30 scale-[1.02]"
+          : "bg-light-blue border-border hover:shadow-md hover:border-deep-blue/20"
+      }`}
     >
-      <button
+      <motion.button
         onClick={() => setExpanded(!expanded)}
-        className="w-full p-4 text-left flex items-start justify-between gap-2"
+        className="w-full p-5 text-left flex items-start justify-between gap-3"
+        whileTap={{ scale: 0.98 }}
       >
         <div>
           <h3 className="font-heading font-semibold text-sm text-foreground">{condition.name}</h3>
-          <p className="text-xs text-muted-foreground font-body mt-1">{condition.desc}</p>
+          <p className="text-xs text-muted-foreground font-body mt-1 line-clamp-2">{condition.desc}</p>
         </div>
         <motion.div
           animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex-shrink-0 mt-1"
+          transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
+          className="flex-shrink-0 mt-1 w-7 h-7 rounded-full bg-deep-blue/10 flex items-center justify-center"
         >
-          <ChevronDown size={16} className="text-deep-blue" />
+          <ChevronDown size={14} className="text-deep-blue" />
         </motion.div>
-      </button>
+      </motion.button>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="px-4 pb-4 border-t border-border/50 pt-3">
-              <p className="text-xs text-foreground/60 font-body leading-relaxed">{details}</p>
-              <a
+            <motion.div
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="px-5 pb-5 border-t border-border/30 pt-4"
+            >
+              <div className="bg-light-blue rounded-xl p-4">
+                <p className="text-xs text-foreground/70 font-body leading-relaxed">{details}</p>
+              </div>
+              <motion.a
                 href="/book-appointment"
-                className="inline-block mt-3 text-xs font-heading font-semibold text-deep-blue hover:text-gold transition-colors"
+                whileHover={{ x: 4 }}
+                className="inline-flex items-center gap-1 mt-4 text-xs font-heading font-semibold text-deep-blue hover:text-gold transition-colors"
               >
                 Book Treatment →
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -90,7 +104,6 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Split path image */}
       <section className="relative">
         <div className="w-full h-72 md:h-96 overflow-hidden">
           <img src={roadImg} alt="From management to curative healthcare" className="w-full h-full object-cover" loading="lazy" />
@@ -98,7 +111,6 @@ export default function Services() {
         </div>
       </section>
 
-      {/* What we don't use */}
       <section className="section-padding bg-light-blue">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
@@ -106,11 +118,18 @@ export default function Services() {
               <div>
                 <h2 className="heading-display text-2xl md:text-3xl text-foreground mb-6">What we do NOT use:</h2>
                 <div className="grid grid-cols-2 gap-3">
-                  {noUseList.map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-sm font-body text-foreground/70">
+                  {noUseList.map((item, i) => (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05, duration: 0.3 }}
+                      className="flex items-center gap-2 text-sm font-body text-foreground/70"
+                    >
                       <X size={14} className="text-destructive flex-shrink-0" />
                       {item}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
                 <p className="mt-8 font-display italic text-deep-blue text-lg">
@@ -125,7 +144,6 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Conditions Grid */}
       <section className="section-padding bg-card">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
@@ -145,13 +163,14 @@ export default function Services() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {filtered.map((c, i) => (
-              <ScrollReveal key={c.name} delay={Math.min(i * 0.02, 0.5)}>
-                <ConditionCard condition={c} />
-              </ScrollReveal>
+          <motion.div
+            layout
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            {filtered.map((c) => (
+              <ConditionCard key={c.name} condition={c} />
             ))}
-          </div>
+          </motion.div>
 
           {filtered.length === 0 && (
             <p className="text-center text-muted-foreground font-body mt-8">
