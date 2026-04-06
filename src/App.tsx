@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { HelmetProvider } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
 
@@ -63,7 +63,7 @@ const App = () => (
           <Navbar />
           <AnimatedRoutes />
           <Footer />
-          <WhatsAppButton />
+          
           <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
