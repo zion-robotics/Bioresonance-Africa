@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Raleway", "sans-serif"],
+        heading: ["Space Grotesk", "Raleway", "sans-serif"],
         body: ["Inter", "sans-serif"],
         display: ["Playfair Display", "serif"],
       },
