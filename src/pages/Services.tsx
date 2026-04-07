@@ -17,7 +17,7 @@ const noUseList = [
 function ConditionCard({ condition }: { condition: { name: string; desc: string; details?: string } }) {
   const [flipped, setFlipped] = useState(false);
 
-  const details = condition.details || condition.desc;
+  const details = condition.details || `${condition.desc}. This condition is identified through bioresonance frequency scanning and addressed by targeting the root-cause distortions — restoring the body's natural balance without drugs or surgery.`;
 
   return (
     <div
