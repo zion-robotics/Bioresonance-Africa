@@ -40,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/training" element={<Training />} />
+        <Route path="/biosemc" element={<BioSEMC />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
