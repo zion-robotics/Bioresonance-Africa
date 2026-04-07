@@ -27,7 +27,7 @@ const productData: Record<string, { name: string; price: string; image: string; 
     price: "₦25,000",
     image: energyTrapper,
     desc: "A frequency concentration product. The exclusive toolset of the 1st Bioresonanceist of Africa©. Compatible with all brands of NLS. Not sold anywhere else.",
-    features: ["Frequency concentration technology", "Compatible with all NLS brands", "Exclusive to Bioresonance Nigeria", "Portable and easy to use"],
+    features: ["Frequency concentration technology", "Compatible with all NLS brands", "Exclusive to Bioresonance Africa", "Portable and easy to use"],
   },
 };
 

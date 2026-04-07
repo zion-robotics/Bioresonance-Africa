@@ -9,7 +9,7 @@ const faqs = [
   { q: "Is bioresonance safe?", a: "Yes. Bioresonance is completely non-invasive. No drugs, no surgery, no chemicals, no unpleasant intake. It works with the body's natural frequencies to restore balance." },
   { q: "How many conditions can bioresonance address?", a: "We address over 144 different conditions ranging from malaria and typhoid to chronic diseases, autoimmune disorders, and mental health challenges." },
   { q: "Can treatment be done remotely?", a: "Yes. Bioresonance enables remote and cross-border treatment through our Remote Black Box technology, integrating telemedicine seamlessly." },
-  { q: "Who founded Bioresonance Nigeria?", a: "Bioresonance Nigeria was founded by Oludele SKO, the 1st Bioresonanceist of Africa©, pioneering a decisive shift in digital curative medicine." },
+  { q: "Who founded Bioresonance Africa?", a: "Bioresonance Africa was founded by Oludele SKO, the 1st Bioresonanceist of Africa©, pioneering a decisive shift in digital curative medicine." },
   { q: "What is Bionic©?", a: "Bionic© is a specialised version of the bioresonance clinic, engineered for precision intervention and root-cause correction using digital frequency medicine." },
   { q: "What is Biopita©?", a: "Biopita© is a structured version of a bioresonance hospital, designed for scale, coordination, and advanced care delivery with multiple Bionic© units." },
   { q: "What products do you offer?", a: "We offer the Original NLS Meta Hunter 4025, the Meta Hunter + Remote Black Box Bundle, and the exclusive Energy Trapper — all professional-grade bioresonance equipment." },

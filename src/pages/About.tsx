@@ -15,7 +15,7 @@ export default function About() {
           <ScrollReveal>
             <span className="text-sm font-body font-medium text-gold uppercase tracking-widest">Our Story</span>
             <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-navy-foreground mt-4">
-              About Bioresonance Nigeria
+              About Bioresonance Africa
             </h1>
             <p className="text-navy-foreground/60 font-body text-lg mt-6 max-w-2xl mx-auto">
               Founded by Oludele SKO — the 1st Bioresonanceist of Africa©

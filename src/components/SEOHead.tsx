@@ -8,13 +8,13 @@ interface SEOHeadProps {
   type?: string;
 }
 
-const BASE_URL = "https://bioresonancenigeria.com";
+const BASE_URL = "https://1stBioresonanceistofAfrica.com";
 
 export default function SEOHead({
   title,
   description,
   path,
-  image = "https://bioresonancenigeria.com/og-image.jpg",
+  image = "https://1stBioresonanceistofAfrica.com/og-image.jpg",
   type = "website",
 }: SEOHeadProps) {
   const fullTitle = path === "/" ? title : `${title} | Bioresonance Africa`;
