@@ -24,6 +24,7 @@ import BookAppointment from "./pages/BookAppointment";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import BioSEMC from "./pages/BioSEMC";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/training" element={<Training />} />
+        <Route path="/biosemc" element={<BioSEMC />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />

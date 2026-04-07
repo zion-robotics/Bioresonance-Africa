@@ -17,7 +17,7 @@ const noUseList = [
 function ConditionCard({ condition }: { condition: { name: string; desc: string; details?: string } }) {
   const [flipped, setFlipped] = useState(false);
 
-  const details = condition.details || `Bioresonance addresses ${condition.name} by identifying the root-cause frequency distortions associated with this condition. Corrective frequencies are then applied to restore balance — without drugs, surgery, or chemicals. Remote treatment via the Black Box is also available.`;
+  const details = condition.details || `${condition.desc}. This condition is identified through bioresonance frequency scanning and addressed by targeting the root-cause distortions — restoring the body's natural balance without drugs or surgery.`;
 
   return (
     <div

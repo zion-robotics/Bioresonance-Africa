@@ -7,6 +7,7 @@ const quickLinks = [
   { name: "Services", path: "/services" },
   { name: "Products", path: "/products" },
   { name: "Training", path: "/training" },
+  { name: "BioSEMC", path: "/biosemc" },
   { name: "Testimonials", path: "/testimonials" },
   { name: "Blog", path: "/blog" },
   { name: "FAQ", path: "/faq" },

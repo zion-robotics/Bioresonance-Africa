@@ -10,6 +10,7 @@ const navLinks = [
   { name: "Services", path: "/services" },
   { name: "Products", path: "/products" },
   { name: "Training", path: "/training" },
+  { name: "BioSEMC", path: "/biosemc" },
   { name: "Blog", path: "/blog" },
   { name: "Testimonials", path: "/testimonials" },
   { name: "FAQ", path: "/faq" },
