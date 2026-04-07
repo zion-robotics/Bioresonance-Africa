@@ -23,7 +23,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -49,7 +49,7 @@ export default function Navbar() {
             <Link to="/" className="flex items-center gap-3 group">
               <img
                 src={logo}
-                alt="Bioresonance Nigeria Logo"
+                alt="Bioresonance Africa Logo"
                 className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="hidden sm:block">
@@ -61,7 +61,7 @@ export default function Navbar() {
                 <span className={`block text-xs font-body tracking-widest uppercase transition-colors duration-300 ${
                   scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
                 }`}>
-                  Nigeria
+                  Africa
                 </span>
               </div>
             </Link>

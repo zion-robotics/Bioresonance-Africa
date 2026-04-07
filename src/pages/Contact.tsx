@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, Facebook } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 
@@ -18,6 +18,7 @@ export default function Contact() {
     { icon: Phone, label: "Phone", value: "+234 803 303 0614", href: "tel:+2348033030614" },
     { icon: MessageCircle, label: "WhatsApp", value: "+234 803 303 0614", href: "https://wa.me/2348033030614" },
     { icon: Mail, label: "Email", value: "1stbionic@gmail.com", href: "mailto:1stbionic@gmail.com" },
+    { icon: Facebook, label: "Facebook", value: "Bioresonance, the Holy Grail of Healing©", href: "https://m.facebook.com/groups/187395870824739/" },
   ];
 
   return (
@@ -40,7 +41,7 @@ export default function Contact() {
                   <c.icon size={24} className="text-deep-blue mb-3" />
                   <p className="text-xs text-muted-foreground font-body uppercase tracking-widest mb-1">{c.label}</p>
                   {c.href ? (
-                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="font-heading font-semibold text-foreground hover:text-deep-blue transition-colors">
+                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="font-heading font-semibold text-foreground hover:text-deep-blue transition-colors text-sm">
                       {c.value}
                     </a>
                   ) : (
