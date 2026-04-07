@@ -144,7 +144,7 @@ export default function Index() {
   return (
     <PageTransition>
       <SEOHead
-        title="Bioresonance Nigeria — The Holy Grail of Healing© | Bionic© & Biopita©"
+        title="Bioresonance Africa — The Holy Grail of Healing© | Bionic© & Biopita©"
         description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 144+ conditions treated with digital frequency medicine by Oludele SKO."
         path="/"
       />

@@ -32,7 +32,7 @@ export default function SEOHead({
       <meta property="og:url" content={url} />
       <meta property="og:type" content={type} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Bioresonance Nigeria" />
+      <meta property="og:site_name" content="Bioresonance Africa" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
