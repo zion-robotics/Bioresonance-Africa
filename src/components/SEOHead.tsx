@@ -17,7 +17,7 @@ export default function SEOHead({
   image = "https://bioresonancenigeria.com/og-image.jpg",
   type = "website",
 }: SEOHeadProps) {
-  const fullTitle = path === "/" ? title : `${title} | Bioresonance Nigeria`;
+  const fullTitle = path === "/" ? title : `${title} | Bioresonance Africa`;
   const url = `${BASE_URL}${path}`;
 
   return (
