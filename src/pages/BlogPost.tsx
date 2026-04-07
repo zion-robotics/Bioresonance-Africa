@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { ArrowLeft, Calendar, Clock, Tag, Share2 } from "lucide-react";
-import { blogPosts } from "./Blog";
+import { blogPosts } from "@/data/blogData";
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
