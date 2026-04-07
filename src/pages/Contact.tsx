@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { MapPin, Phone, Mail, MessageCircle, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 
