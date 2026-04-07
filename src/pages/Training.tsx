@@ -106,13 +106,13 @@ function EnrollmentForm() {
       ].map(({ key, label, type, required }) => (
         <div key={key}>
           <label className="block text-sm font-heading font-medium text-foreground mb-1.5">{label}</label>
-          <input type={type} value={form[key as keyof typeof form]} onChange={(e) => handleChange(key, e.target.value)} required={required} className={inputClass} />
+          <input type={type} value={form[key as keyof typeof form]} onChange={(e) => handleChange(key, e.target.value)} required={required} placeholder={label} className={inputClass} />
         </div>
       ))}
 
       <div>
         <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
-        <select value={form.program} onChange={(e) => handleChange("program", e.target.value)} required className={inputClass}>
+        <select value={form.program} onChange={(e) => handleChange("program", e.target.value)} required title="Select a program" className={inputClass}>
           <option value="">Select a program</option>
           <option value="Certified Bioresonanceist© Training">Certified Bioresonanceist© Training</option>
           <option value="Stroke Rehabilitation">Stroke Rehabilitation</option>
@@ -121,7 +121,7 @@ function EnrollmentForm() {
 
       <div>
         <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Preferred Format</label>
-        <select value={form.format} onChange={(e) => handleChange("format", e.target.value)} required className={inputClass}>
+        <select value={form.format} onChange={(e) => handleChange("format", e.target.value)} required title="Select format" className={inputClass}>
           <option value="">Select format</option>
           <option value="Physical in Lagos">Physical in Lagos</option>
           <option value="Online">Online</option>
@@ -130,12 +130,12 @@ function EnrollmentForm() {
 
       <div>
         <label className="block text-sm font-heading font-medium text-foreground mb-1.5">How did you hear about us?</label>
-        <input type="text" value={form.hearAbout} onChange={(e) => handleChange("hearAbout", e.target.value)} className={inputClass} />
+        <input type="text" value={form.hearAbout} onChange={(e) => handleChange("hearAbout", e.target.value)} placeholder="How did you hear about us?" className={inputClass} />
       </div>
 
       <div>
         <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Message or Questions</label>
-        <textarea value={form.message} onChange={(e) => handleChange("message", e.target.value)} rows={4} className={`${inputClass} resize-none`} />
+        <textarea value={form.message} onChange={(e) => handleChange("message", e.target.value)} rows={4} placeholder="Your message or questions..." className={`${inputClass} resize-none`} />
       </div>
 
       <motion.button

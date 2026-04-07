@@ -12,7 +12,7 @@
 Bioresonance Africa is a cutting-edge digital frequency medicine platform founded by **Oludele SKO**, the 1st Bioresonanceist of Africa©. We deliver non-invasive, root-cause healing through precision frequency-based medical technology.
 
 ### Our Mission
-To advance frequency medicine across Africa through innovative diagnostic tools, professional training, and accessible healthcare solutions that treat 144+ conditions without drugs, surgery, or chemicals.
+To advance frequency medicine across Africa through innovative diagnostic tools, professional training, and accessible healthcare solutions that treat 100+ conditions without drugs, surgery, or chemicals.
 
 ### Our Brands
 - **Bionic©** — Specialized bioresonance clinics engineered for precision intervention and digital frequency medicine

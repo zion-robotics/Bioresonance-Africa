@@ -17,8 +17,8 @@ import metaHunter from "@/assets/meta_hunter.jpeg";
 import blackBox from "@/assets/black_box.jpeg";
 
 const stats = [
-  { value: 144, suffix: "+", label: "Conditions Treated" },
-  { value: 500, suffix: "+", label: "Lives Transformed" },
+  { value: 100, suffix: "+", label: "Conditions Treated" },
+  { value: 50, suffix: "+", label: "Lives Transformed" },
   { value: 100, suffix: "%", label: "Non-Invasive" },
 ];
 
@@ -145,7 +145,7 @@ export default function Index() {
     <PageTransition>
       <SEOHead
         title="Bioresonance Africa — The Holy Grail of Healing© | Bionic© & Biopita©"
-        description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 144+ conditions treated with digital frequency medicine by Oludele SKO."
+        description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 100+ conditions treated with digital frequency medicine by Oludele SKO."
         path="/"
       />
       {/* HERO */}
@@ -276,7 +276,7 @@ export default function Index() {
                       <HeartPulse className="text-gold" size={24} />
                     </div>
                     <div>
-                      <p className="font-heading font-bold text-foreground text-sm">144+ Conditions</p>
+                      <p className="font-heading font-bold text-foreground text-sm">100+ Conditions</p>
                       <p className="text-xs text-muted-foreground font-body">Successfully Addressed</p>
                     </div>
                   </div>
@@ -413,7 +413,7 @@ export default function Index() {
 
           <ScrollReveal delay={0.2}>
             <Link to="/services" className="btn-accent-brand inline-flex items-center gap-2 text-lg group">
-              See All 144+ Conditions
+              See All 100+ Conditions
               <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </ScrollReveal>

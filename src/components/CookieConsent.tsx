@@ -40,8 +40,7 @@ export default function CookieConsent() {
           <div className="flex gap-3">
             <button
               onClick={accept}
-              className="flex-1 py-2.5 rounded-lg text-sm font-heading font-semibold transition-all duration-300 hover:-translate-y-0.5"
-              style={{ backgroundColor: "hsl(var(--gold))", color: "hsl(var(--navy))" }}
+              className="flex-1 py-2.5 rounded-lg text-sm font-heading font-semibold transition-all duration-300 hover:-translate-y-0.5 bg-gold text-navy"
             >
               Accept
             </button>

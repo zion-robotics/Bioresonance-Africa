@@ -21,21 +21,18 @@ function ConditionCard({ condition }: { condition: { name: string; desc: string;
 
   return (
     <div
-      className="relative h-56 cursor-pointer"
-      style={{ perspective: "1000px" }}
+      className="relative h-56 cursor-pointer [perspective:1000px]"
       onClick={() => setFlipped(!flipped)}
     >
       <motion.div
-        className="relative w-full h-full"
+        className="relative w-full h-full [transform-style:preserve-3d]"
         initial={false}
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 200, damping: 25 }}
-        style={{ transformStyle: "preserve-3d" }}
       >
         {/* Front */}
         <div
-          className="absolute inset-0 rounded-2xl border border-border bg-light-blue p-5 flex flex-col justify-between shadow-sm hover:shadow-lg transition-shadow duration-300"
-          style={{ backfaceVisibility: "hidden" }}
+          className="absolute inset-0 rounded-2xl border border-border bg-light-blue p-5 flex flex-col justify-between shadow-sm hover:shadow-lg transition-shadow duration-300 [backface-visibility:hidden]"
         >
           <div>
             <h3 className="font-heading font-semibold text-sm text-foreground mb-2">{condition.name}</h3>
@@ -46,8 +43,7 @@ function ConditionCard({ condition }: { condition: { name: string; desc: string;
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-2xl border border-deep-blue/30 p-5 flex flex-col justify-between shadow-xl overflow-y-auto"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)", backgroundColor: "hsl(216, 63%, 30%)" }}
+          className="absolute inset-0 rounded-2xl border border-deep-blue/30 p-5 flex flex-col justify-between shadow-xl overflow-y-auto bg-navy [backface-visibility:hidden] [transform:rotateY(180deg)]"
         >
           <div>
             <h3 className="font-heading font-semibold text-sm text-primary-foreground mb-2">{condition.name}</h3>
@@ -79,7 +75,7 @@ export default function Services() {
 
   return (
     <PageTransition>
-      <SEOHead title="Services" description="144+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." path="/services" />
+      <SEOHead title="Services" description="100+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." path="/services" />
 
       {/* HERO */}
       <section className="bg-navy pt-32 pb-20">
@@ -148,12 +144,12 @@ export default function Services() {
         </div>
       </section>
 
-      {/* 144+ CONDITIONS - 3D Flip Cards */}
+      {/* 100+ CONDITIONS - 3D Flip Cards */}
       <section className="section-padding bg-card">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-10">
-              <h2 className="heading-display text-3xl text-foreground mb-2">144+ Conditions We Address</h2>
+              <h2 className="heading-display text-3xl text-foreground mb-2">100+ Conditions We Address</h2>
               <p className="text-sm text-muted-foreground font-body mb-6">Tap any card to flip and learn how bioresonance treats it</p>
               <div className="max-w-md mx-auto relative">
                 <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />

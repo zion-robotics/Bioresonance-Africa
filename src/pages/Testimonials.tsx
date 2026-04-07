@@ -83,7 +83,7 @@ export default function Testimonials() {
                     loading="lazy"
                   />
                 </div>
-                <div className={`p-8 flex flex-col justify-center ${i % 2 === 1 ? "md:order-1" : ""}`} style={{ backgroundColor: "hsl(216, 63%, 30%)" }}>
+                <div className={`p-8 flex flex-col justify-center bg-navy ${i % 2 === 1 ? "md:order-1" : ""}`}>
                   <span className="text-gold text-xs font-heading font-semibold uppercase tracking-widest mb-3">{t.title}</span>
                   <p className="text-primary-foreground/90 font-body text-sm leading-relaxed mb-4">"{t.quote}"</p>
                   {t.cta && (

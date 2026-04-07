@@ -68,6 +68,7 @@ export default function Contact() {
                         type={type}
                         value={form[key as keyof typeof form]}
                         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                        placeholder={label}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
                       />
@@ -79,6 +80,7 @@ export default function Contact() {
                   <textarea
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="Your message..."
                     rows={5}
                     required
                     className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all resize-none"
