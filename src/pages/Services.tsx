@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, X, ChevronDown } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
@@ -15,67 +15,54 @@ const noUseList = [
 ];
 
 function ConditionCard({ condition }: { condition: { name: string; desc: string; details?: string } }) {
-  const [expanded, setExpanded] = useState(false);
+  const [flipped, setFlipped] = useState(false);
 
-  const details = condition.details || `Bioresonance addresses ${condition.name} by identifying the root-cause frequency distortions associated with this condition. Using the NLS Meta Hunter 4025, we perform a comprehensive scan to detect the energetic origin of the disorder. Corrective frequencies are then applied to restore balance — without drugs, surgery, or chemicals. Treatment is non-invasive, precise, and tailored to your unique energetic signature. Remote treatment via the Black Box is also available for this condition.`;
+  const details = condition.details || `Bioresonance addresses ${condition.name} by identifying the root-cause frequency distortions associated with this condition. Corrective frequencies are then applied to restore balance — without drugs, surgery, or chemicals. Remote treatment via the Black Box is also available.`;
 
   return (
-    <motion.div
-      layout
-      className={`rounded-2xl border overflow-hidden transition-all duration-500 ${
-        expanded
-          ? "bg-card shadow-xl border-deep-blue/30 scale-[1.02]"
-          : "bg-light-blue border-border hover:shadow-md hover:border-deep-blue/20"
-      }`}
+    <div
+      className="relative h-56 cursor-pointer"
+      style={{ perspective: "1000px" }}
+      onClick={() => setFlipped(!flipped)}
     >
-      <motion.button
-        onClick={() => setExpanded(!expanded)}
-        className="w-full p-5 text-left flex items-start justify-between gap-3"
-        whileTap={{ scale: 0.98 }}
+      <motion.div
+        className="relative w-full h-full"
+        initial={false}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 200, damping: 25 }}
+        style={{ transformStyle: "preserve-3d" }}
       >
-        <div>
-          <h3 className="font-heading font-semibold text-sm text-foreground">{condition.name}</h3>
-          <p className="text-xs text-muted-foreground font-body mt-1 line-clamp-2">{condition.desc}</p>
-        </div>
-        <motion.div
-          animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-          className="flex-shrink-0 mt-1 w-7 h-7 rounded-full bg-deep-blue/10 flex items-center justify-center"
+        {/* Front */}
+        <div
+          className="absolute inset-0 rounded-2xl border border-border bg-light-blue p-5 flex flex-col justify-between shadow-sm hover:shadow-lg transition-shadow duration-300"
+          style={{ backfaceVisibility: "hidden" }}
         >
-          <ChevronDown size={14} className="text-deep-blue" />
-        </motion.div>
-      </motion.button>
+          <div>
+            <h3 className="font-heading font-semibold text-sm text-foreground mb-2">{condition.name}</h3>
+            <p className="text-xs text-muted-foreground font-body line-clamp-3">{condition.desc}</p>
+          </div>
+          <span className="text-xs font-heading font-semibold text-deep-blue mt-2">Tap to learn more →</span>
+        </div>
 
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        {/* Back */}
+        <div
+          className="absolute inset-0 rounded-2xl border border-deep-blue/30 p-5 flex flex-col justify-between shadow-xl overflow-y-auto"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)", backgroundColor: "hsl(216, 63%, 30%)" }}
+        >
+          <div>
+            <h3 className="font-heading font-semibold text-sm text-primary-foreground mb-2">{condition.name}</h3>
+            <p className="text-xs text-primary-foreground/80 font-body leading-relaxed">{details}</p>
+          </div>
+          <a
+            href="/book-appointment"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1 mt-3 text-xs font-heading font-semibold text-gold hover:text-gold/80 transition-colors"
           >
-            <motion.div
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="px-5 pb-5 border-t border-border/30 pt-4"
-            >
-              <div className="bg-light-blue rounded-xl p-4">
-                <p className="text-xs text-foreground/70 font-body leading-relaxed">{details}</p>
-              </div>
-              <motion.a
-                href="/book-appointment"
-                whileHover={{ x: 4 }}
-                className="inline-flex items-center gap-1 mt-4 text-xs font-heading font-semibold text-deep-blue hover:text-gold transition-colors"
-              >
-                Book Treatment →
-              </motion.a>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+            Book Treatment →
+          </a>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -93,6 +80,8 @@ export default function Services() {
   return (
     <PageTransition>
       <SEOHead title="Services" description="144+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." path="/services" />
+
+      {/* HERO */}
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
@@ -104,13 +93,28 @@ export default function Services() {
         </div>
       </section>
 
+      {/* ROAD IMAGE - no blend, clean */}
       <section className="relative">
         <div className="w-full h-72 md:h-96 overflow-hidden">
           <img src={roadImg} alt="From management to curative healthcare" className="w-full h-full object-cover" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,100%,98%)] to-transparent" />
         </div>
       </section>
 
+      {/* Bionic/Biopita Ecosystem */}
+      <section className="py-12 bg-navy">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <ScrollReveal>
+            <p className="font-display italic text-gold text-lg md:text-xl leading-relaxed mb-4">
+              Bionic© and Biopita© together form a complete ecosystem, both driven by the same mandate: to eliminate root causes and redefine the future of medicine.
+            </p>
+            <p className="text-navy-foreground/70 font-body text-sm leading-relaxed">
+              Bioresonance, the Holy Grail of Healing© is reshaping the future of medicine. From patient to survivor©, Hospital to Biopita©, Clinic to Bionic© and analogue to digital.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* WHAT WE DON'T USE */}
       <section className="section-padding bg-light-blue">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
@@ -144,12 +148,13 @@ export default function Services() {
         </div>
       </section>
 
+      {/* 144+ CONDITIONS - 3D Flip Cards */}
       <section className="section-padding bg-card">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-10">
               <h2 className="heading-display text-3xl text-foreground mb-2">144+ Conditions We Address</h2>
-              <p className="text-sm text-muted-foreground font-body mb-6">Click any condition to learn more about how bioresonance treats it</p>
+              <p className="text-sm text-muted-foreground font-body mb-6">Tap any card to flip and learn how bioresonance treats it</p>
               <div className="max-w-md mx-auto relative">
                 <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <input
@@ -163,14 +168,11 @@ export default function Services() {
             </div>
           </ScrollReveal>
 
-          <motion.div
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filtered.map((c) => (
               <ConditionCard key={c.name} condition={c} />
             ))}
-          </motion.div>
+          </div>
 
           {filtered.length === 0 && (
             <p className="text-center text-muted-foreground font-body mt-8">

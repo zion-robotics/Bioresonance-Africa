@@ -36,16 +36,47 @@ const programs = [
   },
 ];
 
-export default function Training() {
+function ProgramCard({ prog, index }: { prog: typeof programs[0]; index: number }) {
+  return (
+    <ScrollReveal delay={index * 0.15}>
+      <motion.div
+        whileHover={{ y: -8 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="rounded-2xl overflow-hidden h-full flex flex-col border border-border shadow-sm hover:shadow-xl transition-shadow duration-500"
+        style={{ backgroundColor: "hsl(216, 63%, 30%)" }}
+      >
+        <div className="p-8 flex-1">
+          <div className="w-14 h-14 rounded-xl bg-gold/15 flex items-center justify-center mb-6">
+            <prog.icon size={28} className="text-gold" />
+          </div>
+          <h3 className="font-heading font-bold text-xl text-primary-foreground mb-4">{prog.title}</h3>
+          <p className="text-primary-foreground/70 font-body text-sm leading-relaxed mb-6">{prog.description}</p>
+
+          <div className="space-y-4">
+            {prog.details.map((d) => (
+              <div key={d.label} className="flex items-start gap-3">
+                <d.icon size={16} className="text-gold mt-0.5 flex-shrink-0" />
+                <div>
+                  <span className="text-xs font-heading font-semibold text-primary-foreground uppercase tracking-wider">{d.label}</span>
+                  <p className="text-sm text-primary-foreground/60 font-body">{d.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="px-8 pb-8">
+          <a href="#enroll" className="btn-accent-brand w-full text-center block">
+            Enroll Now
+          </a>
+        </div>
+      </motion.div>
+    </ScrollReveal>
+  );
+}
+
+function EnrollmentForm() {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    location: "",
-    program: "",
-    format: "",
-    hearAbout: "",
-    message: "",
+    name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -56,6 +87,70 @@ export default function Training() {
 
   const handleChange = (key: string, value: string) => setForm((prev) => ({ ...prev, [key]: value }));
 
+  const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all";
+
+  return (
+    <motion.form
+      onSubmit={handleSubmit}
+      className="space-y-5 rounded-2xl border border-border p-8 bg-light-blue"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      {[
+        { key: "name", label: "Full Name", type: "text", required: true },
+        { key: "email", label: "Email Address", type: "email", required: true },
+        { key: "phone", label: "Phone Number", type: "tel", required: true },
+        { key: "location", label: "Location / Country", type: "text", required: true },
+      ].map(({ key, label, type, required }) => (
+        <div key={key}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">{label}</label>
+          <input type={type} value={form[key as keyof typeof form]} onChange={(e) => handleChange(key, e.target.value)} required={required} className={inputClass} />
+        </div>
+      ))}
+
+      <div>
+        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
+        <select value={form.program} onChange={(e) => handleChange("program", e.target.value)} required className={inputClass}>
+          <option value="">Select a program</option>
+          <option value="Certified Bioresonanceist© Training">Certified Bioresonanceist© Training</option>
+          <option value="Stroke Rehabilitation">Stroke Rehabilitation</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Preferred Format</label>
+        <select value={form.format} onChange={(e) => handleChange("format", e.target.value)} required className={inputClass}>
+          <option value="">Select format</option>
+          <option value="Physical in Lagos">Physical in Lagos</option>
+          <option value="Online">Online</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">How did you hear about us?</label>
+        <input type="text" value={form.hearAbout} onChange={(e) => handleChange("hearAbout", e.target.value)} className={inputClass} />
+      </div>
+
+      <div>
+        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Message or Questions</label>
+        <textarea value={form.message} onChange={(e) => handleChange("message", e.target.value)} rows={4} className={`${inputClass} resize-none`} />
+      </div>
+
+      <motion.button
+        type="submit"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="btn-accent-brand w-full text-center text-lg"
+      >
+        Begin My Journey
+      </motion.button>
+    </motion.form>
+  );
+}
+
+export default function Training() {
   return (
     <PageTransition>
       <SEOHead title="Training Program — Become a Gen-B Healer" description="Training program for aspiring bioresonanceists. Learn the methodology of bioresonance, the Holy Grail of Healing©." path="/training" />
@@ -101,38 +196,7 @@ export default function Training() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {programs.map((prog, i) => (
-              <ScrollReveal key={prog.id} delay={i * 0.15}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden h-full flex flex-col"
-                >
-                  <div className="p-8 flex-1">
-                    <div className="w-14 h-14 rounded-xl bg-deep-blue/10 flex items-center justify-center mb-6">
-                      <prog.icon size={28} className="text-deep-blue" />
-                    </div>
-                    <h3 className="font-heading font-bold text-xl text-foreground mb-4">{prog.title}</h3>
-                    <p className="text-foreground/60 font-body text-sm leading-relaxed mb-6">{prog.description}</p>
-
-                    <div className="space-y-4">
-                      {prog.details.map((d) => (
-                        <div key={d.label} className="flex items-start gap-3">
-                          <d.icon size={16} className="text-gold mt-0.5 flex-shrink-0" />
-                          <div>
-                            <span className="text-xs font-heading font-semibold text-foreground uppercase tracking-wider">{d.label}</span>
-                            <p className="text-sm text-foreground/60 font-body">{d.value}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="px-8 pb-8">
-                    <a href="#enroll" className="btn-accent-brand w-full text-center block">
-                      Enroll Now
-                    </a>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
+              <ProgramCard key={prog.id} prog={prog} index={i} />
             ))}
           </div>
         </div>
@@ -148,94 +212,11 @@ export default function Training() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.1}>
-            <motion.form
-              onSubmit={handleSubmit}
-              className="space-y-5 bg-light-blue rounded-2xl border border-border p-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              {[
-                { key: "name", label: "Full Name", type: "text", required: true },
-                { key: "email", label: "Email Address", type: "email", required: true },
-                { key: "phone", label: "Phone Number", type: "tel", required: true },
-                { key: "location", label: "Location / Country", type: "text", required: true },
-              ].map(({ key, label, type, required }) => (
-                <div key={key}>
-                  <label className="block text-sm font-heading font-medium text-foreground mb-1.5">{label}</label>
-                  <input
-                    type={type}
-                    value={form[key as keyof typeof form]}
-                    onChange={(e) => handleChange(key, e.target.value)}
-                    required={required}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
-                  />
-                </div>
-              ))}
+          <EnrollmentForm />
 
-              <div>
-                <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
-                <select
-                  value={form.program}
-                  onChange={(e) => handleChange("program", e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
-                >
-                  <option value="">Select a program</option>
-                  <option value="Certified Bioresonanceist© Training">Certified Bioresonanceist© Training</option>
-                  <option value="Stroke Rehabilitation">Stroke Rehabilitation</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Preferred Format</label>
-                <select
-                  value={form.format}
-                  onChange={(e) => handleChange("format", e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
-                >
-                  <option value="">Select format</option>
-                  <option value="Physical in Lagos">Physical in Lagos</option>
-                  <option value="Online">Online</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-heading font-medium text-foreground mb-1.5">How did you hear about us?</label>
-                <input
-                  type="text"
-                  value={form.hearAbout}
-                  onChange={(e) => handleChange("hearAbout", e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Message or Questions</label>
-                <textarea
-                  value={form.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all resize-none"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-accent-brand w-full text-center text-lg"
-              >
-                Begin My Journey
-              </motion.button>
-            </motion.form>
-
-            <p className="text-center text-sm text-muted-foreground font-body mt-6 max-w-lg mx-auto">
-              Upon submission you will receive a confirmation email and our team will contact you within 24 hours to discuss your training details and investment.
-            </p>
-          </ScrollReveal>
+          <p className="text-center text-sm text-muted-foreground font-body mt-6 max-w-lg mx-auto">
+            Upon submission you will receive a confirmation email and our team will contact you within 24 hours to discuss your training details and investment.
+          </p>
         </div>
       </section>
 
