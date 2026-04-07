@@ -24,6 +24,7 @@ import BookAppointment from "./pages/BookAppointment";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import BioSEMC from "./pages/BioSEMC";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
