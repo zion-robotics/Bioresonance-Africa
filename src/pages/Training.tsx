@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { GraduationCap, Activity, Clock, DollarSign, Award, MapPin, MessageCircle } from "lucide-react";
@@ -6,37 +6,26 @@ import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import SEOHead from "@/components/SEOHead";
 import genB from "@/assets/gen_b.jpeg";
+import { client } from "@/lib/sanity";
 
-const programs = [
-  {
-    id: "bioresonanceist",
-    icon: GraduationCap,
-    title: "How to Become a Certified Bioresonanceist©",
-    description:
-      "Learn the full methodology, tools and precision of bioresonance, the Holy Grail of Healing©. Master the art of identifying and eliminating root causes using energy, frequency and intelligent resonance. Directly trained and certified by Oludele SKO, the 1st Bioresonanceist of Africa©.",
-    details: [
-      { icon: Clock, label: "Duration", value: "Flexible — tailored to each individual's availability and learning pace" },
-      { icon: DollarSign, label: "Price", value: "Flexible — discussed upon enrollment" },
-      { icon: Award, label: "Certificate", value: "Yes — awarded after proof of stewardship" },
-      { icon: MapPin, label: "Format", value: "Physical in Lagos. Online available in rare cases." },
-    ],
-  },
-  {
-    id: "stroke-rehab",
-    icon: Activity,
-    title: "Stroke Rehabilitation",
-    description:
-      "A specialised frequency-based stroke recovery program. Learn the non-invasive bioresonance approach to stroke rehabilitation. Root-cause treatment methodology for stroke recovery without drugs or surgery.",
-    details: [
-      { icon: Clock, label: "Duration", value: "Flexible — tailored to each individual's availability and learning pace" },
-      { icon: DollarSign, label: "Price", value: "Flexible — discussed upon enrollment" },
-      { icon: Award, label: "Certificate", value: "Yes — awarded after proof of stewardship" },
-      { icon: MapPin, label: "Format", value: "Physical in Lagos. Online available in rare cases." },
-    ],
-  },
-];
+interface TrainingProgram {
+  _id: string;
+  title: string;
+  description: string;
+  price: string;
+  slots: number;
+  isOpen: boolean;
+  date: string;
+}
 
-function ProgramCard({ prog, index }: { prog: typeof programs[0]; index: number }) {
+function ProgramCard({ prog, index }: { prog: TrainingProgram; index: number }) {
+  const details = [
+    { icon: Clock, label: "Duration", value: "Flexible — tailored to each individual's availability and learning pace" },
+    { icon: DollarSign, label: "Price", value: prog.price || "Flexible — discussed upon enrollment" },
+    { icon: Award, label: "Certificate", value: "Yes — awarded after proof of stewardship" },
+    { icon: MapPin, label: "Format", value: "Physical in Lagos. Online available in rare cases." },
+  ];
+
   return (
     <ScrollReveal delay={index * 0.15}>
       <motion.div
@@ -47,13 +36,12 @@ function ProgramCard({ prog, index }: { prog: typeof programs[0]; index: number 
       >
         <div className="p-8 flex-1">
           <div className="w-14 h-14 rounded-xl bg-gold/15 flex items-center justify-center mb-6">
-            <prog.icon size={28} className="text-gold" />
+            <GraduationCap size={28} className="text-gold" />
           </div>
           <h3 className="font-heading font-bold text-xl text-primary-foreground mb-4">{prog.title}</h3>
           <p className="text-primary-foreground/70 font-body text-sm leading-relaxed mb-6">{prog.description}</p>
-
           <div className="space-y-4">
-            {prog.details.map((d) => (
+            {details.map((d) => (
               <div key={d.label} className="flex items-start gap-3">
                 <d.icon size={16} className="text-gold mt-0.5 flex-shrink-0" />
                 <div>
@@ -63,18 +51,23 @@ function ProgramCard({ prog, index }: { prog: typeof programs[0]; index: number 
               </div>
             ))}
           </div>
+          {!prog.isOpen && (
+            <p className="mt-4 text-xs text-gold font-body">Enrollment currently closed</p>
+          )}
         </div>
         <div className="px-8 pb-8">
-          <a href="#enroll" className="btn-accent-brand w-full text-center block">
-            Enroll Now
-          </a>
+          {prog.isOpen && (
+            <a href="#enroll" className="btn-accent-brand w-full text-center block">
+              Enroll Now
+            </a>
+          )}
         </div>
       </motion.div>
     </ScrollReveal>
   );
 }
 
-function EnrollmentForm() {
+function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
   const [form, setForm] = useState({
     name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "",
   });
@@ -86,7 +79,6 @@ function EnrollmentForm() {
   };
 
   const handleChange = (key: string, value: string) => setForm((prev) => ({ ...prev, [key]: value }));
-
   const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all";
 
   return (
@@ -114,8 +106,9 @@ function EnrollmentForm() {
         <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
         <select value={form.program} onChange={(e) => handleChange("program", e.target.value)} required title="Select a program" className={inputClass}>
           <option value="">Select a program</option>
-          <option value="Certified Bioresonanceist© Training">Certified Bioresonanceist© Training</option>
-          <option value="Stroke Rehabilitation">Stroke Rehabilitation</option>
+          {programs.filter(p => p.isOpen).map(p => (
+            <option key={p._id} value={p.title}>{p.title}</option>
+          ))}
         </select>
       </div>
 
@@ -151,11 +144,23 @@ function EnrollmentForm() {
 }
 
 export default function Training() {
+  const [programs, setPrograms] = useState<TrainingProgram[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "training"] | order(_createdAt asc)`)
+      .then((data) => {
+        setPrograms(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
   return (
     <PageTransition>
-      <SEOHead title="Training Program — Become a Gen-B Healer" description="Training program for aspiring bioresonanceists. Learn the methodology of bioresonance, the Holy Grail of Healing©." path="/training" />
+      <SEOHead title="Training Program — Become a Gen-B Healer" description="Training program for aspiring bioresonanceists." path="/training" />
 
-      {/* HERO */}
       <section className="bg-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={genB} alt="Gen-B Healers" className="w-full h-full object-cover opacity-40" />
@@ -178,13 +183,12 @@ export default function Training() {
               Trained by the 1st Bioresonanceist of Africa©
             </p>
             <p className="text-navy-foreground/60 font-body text-lg mt-6 max-w-2xl mx-auto">
-              Our training is designed for practitioners and individuals who have an interest in digital and electronic medicine. Training is conducted physically in Lagos, Nigeria. Online participation is available in limited cases upon request.
+              Our training is designed for practitioners and individuals who have an interest in digital and electronic medicine.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* PROGRAMS */}
       <section className="section-padding bg-light-blue">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
@@ -194,15 +198,16 @@ export default function Training() {
             </div>
           </ScrollReveal>
 
+          {loading && <p className="text-center text-muted-foreground font-body">Loading programs...</p>}
+
           <div className="grid md:grid-cols-2 gap-8">
             {programs.map((prog, i) => (
-              <ProgramCard key={prog.id} prog={prog} index={i} />
+              <ProgramCard key={prog._id} prog={prog} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ENROLLMENT FORM */}
       <section id="enroll" className="section-padding bg-card">
         <div className="max-w-2xl mx-auto">
           <ScrollReveal>
@@ -211,16 +216,13 @@ export default function Training() {
               <p className="text-muted-foreground font-body text-sm">Fill in your details to begin your journey</p>
             </div>
           </ScrollReveal>
-
-          <EnrollmentForm />
-
+          <EnrollmentForm programs={programs} />
           <p className="text-center text-sm text-muted-foreground font-body mt-6 max-w-lg mx-auto">
-            Upon submission you will receive a confirmation email and our team will contact you within 24 hours to discuss your training details and investment.
+            Upon submission you will receive a confirmation email and our team will contact you within 24 hours.
           </p>
         </div>
       </section>
 
-      {/* WHATSAPP CTA */}
       <section className="py-12 bg-light-blue">
         <div className="max-w-2xl mx-auto text-center px-4">
           <ScrollReveal>

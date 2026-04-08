@@ -1,21 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { Calendar, Search, ArrowRight, Clock } from "lucide-react";
-import { blogPosts } from "@/data/blogData";
+import { client } from "@/lib/sanity";
 
-const categories = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category)))];
+interface BlogPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  author: string;
+  publishedAt: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+}
 
 export default function Blog() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "blog"] | order(publishedAt desc)`)
+      .then((data) => {
+        setBlogPosts(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const categories = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category).filter(Boolean)))];
 
   const filtered = blogPosts.filter((post) => {
     const matchesSearch =
-      post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(search.toLowerCase());
+      post.title?.toLowerCase().includes(search.toLowerCase()) ||
+      post.excerpt?.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = activeCategory === "All" || post.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
@@ -38,7 +61,6 @@ export default function Blog() {
 
       <section className="section-padding bg-light-blue">
         <div className="max-w-7xl mx-auto">
-          {/* Search and filters */}
           <ScrollReveal>
             <div className="flex flex-col md:flex-row gap-4 mb-10">
               <div className="relative flex-1 max-w-md">
@@ -69,10 +91,13 @@ export default function Blog() {
             </div>
           </ScrollReveal>
 
-          {/* Featured post */}
-          {filtered.length > 0 && (
+          {loading && (
+            <p className="text-center text-muted-foreground font-body mt-8">Loading articles...</p>
+          )}
+
+          {!loading && filtered.length > 0 && (
             <ScrollReveal>
-              <Link to={`/blog/${filtered[0].slug}`} className="block mb-12">
+              <Link to={`/blog/${filtered[0].slug.current}`} className="block mb-12">
                 <motion.article
                   whileHover={{ y: -4 }}
                   className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500"
@@ -84,11 +109,6 @@ export default function Blog() {
                         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                         className="absolute w-64 h-64 border border-gold/10 rounded-full"
                       />
-                      <motion.div
-                        animate={{ rotate: [360, 0] }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-40 h-40 border border-gold/20 rounded-full"
-                      />
                       <span className="text-8xl font-heading font-bold text-gold/20 relative z-10">
                         {filtered[0].title[0]}
                       </span>
@@ -99,7 +119,7 @@ export default function Blog() {
                           {filtered[0].category}
                         </span>
                         <span className="flex items-center gap-1 text-xs text-muted-foreground font-body">
-                          <Calendar size={12} /> {filtered[0].date}
+                          <Calendar size={12} /> {new Date(filtered[0].publishedAt).toLocaleDateString()}
                         </span>
                         <span className="flex items-center gap-1 text-xs text-muted-foreground font-body">
                           <Clock size={12} /> {filtered[0].readTime}
@@ -117,17 +137,15 @@ export default function Blog() {
             </ScrollReveal>
           )}
 
-          {/* Article grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.slice(1).map((post, i) => (
-              <ScrollReveal key={post.slug} delay={i * 0.1}>
-                <Link to={`/blog/${post.slug}`}>
+              <ScrollReveal key={post._id} delay={i * 0.1}>
+                <Link to={`/blog/${post.slug.current}`}>
                   <motion.article
                     whileHover={{ y: -6 }}
                     className="bg-card rounded-2xl border border-border overflow-hidden h-full flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-500"
                   >
-                    <div className="h-48 bg-gradient-to-br from-deep-blue/10 via-gold/5 to-deep-blue/10 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(218_72%_30%/0.1),transparent_60%)]" />
+                    <div className="h-48 bg-gradient-to-br from-deep-blue/10 via-gold/5 to-deep-blue/10 flex items-center justify-center">
                       <span className="text-6xl font-heading font-bold text-deep-blue/15">{post.title[0]}</span>
                     </div>
                     <div className="p-6 flex flex-col flex-1">
@@ -142,7 +160,9 @@ export default function Blog() {
                       <h3 className="font-heading font-bold text-lg text-foreground mb-2 leading-snug">{post.title}</h3>
                       <p className="text-sm text-muted-foreground font-body flex-1 leading-relaxed">{post.excerpt}</p>
                       <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-                        <span className="text-xs text-muted-foreground font-body">{post.date}</span>
+                        <span className="text-xs text-muted-foreground font-body">
+                          {new Date(post.publishedAt).toLocaleDateString()}
+                        </span>
                         <span className="text-sm font-heading font-semibold text-deep-blue flex items-center gap-1">
                           Read More <ArrowRight size={14} />
                         </span>
@@ -154,9 +174,9 @@ export default function Blog() {
             ))}
           </div>
 
-          {filtered.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <p className="text-center text-muted-foreground font-body mt-8">
-              No articles found matching your search.
+              No articles found.
             </p>
           )}
         </div>
