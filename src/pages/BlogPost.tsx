@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { PortableText } from "@portabletext/react";
+import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { ArrowLeft, Calendar, Clock, Tag, Share2 } from "lucide-react";
@@ -16,7 +16,7 @@ interface BlogPost {
   excerpt: string;
   category: string;
   readTime: string;
-  body: Record<string, unknown>[];
+  body: PortableTextBlock[];
 }
 
 export default function BlogPost() {
