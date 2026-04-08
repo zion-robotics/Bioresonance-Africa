@@ -7,6 +7,7 @@ import PageTransition from "@/components/PageTransition";
 import SEOHead from "@/components/SEOHead";
 import genB from "@/assets/gen_b.jpeg";
 import { client } from "@/lib/sanity";
+import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
 
 interface TrainingProgram {
   _id: string;
@@ -71,11 +72,34 @@ function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
   const [form, setForm] = useState({
     name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "",
   });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Enrollment submitted! We'll contact you within 24 hours.");
-    setForm({ name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "" });
+    setSending(true);
+    try {
+      await sendAdminNotification({
+        form_type: "Training Enrollment",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+        location: form.location,
+        message: `Program: ${form.program}\nFormat: ${form.format}\nHow they heard: ${form.hearAbout}\n\n${form.message}`,
+        date: new Date().toLocaleDateString(),
+      });
+      await sendConfirmation({
+        form_type: "training enrollment",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+      });
+      toast.success("Enrollment submitted! We'll contact you within 24 hours.");
+      setForm({ name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "" });
+    } catch {
+      toast.error("Failed to submit. Please try WhatsApp instead.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (key: string, value: string) => setForm((prev) => ({ ...prev, [key]: value }));
@@ -133,11 +157,12 @@ function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
 
       <motion.button
         type="submit"
+        disabled={sending}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="btn-accent-brand w-full text-center text-lg"
+        className="btn-accent-brand w-full text-center text-lg disabled:opacity-60"
       >
-        Begin My Journey
+        {sending ? "Submitting..." : "Begin My Journey"}
       </motion.button>
     </motion.form>
   );

@@ -3,14 +3,38 @@ import { toast } from "sonner";
 import { MapPin, Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! We'll get back to you soon.");
-    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    setSending(true);
+    try {
+      await sendAdminNotification({
+        form_type: "Contact Form",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+        location: "",
+        message: `Subject: ${form.subject}\n\n${form.message}`,
+        date: new Date().toLocaleDateString(),
+      });
+      await sendConfirmation({
+        form_type: "contact form",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+      });
+      toast.success("Message sent! We'll get back to you within 24 hours.");
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch {
+      toast.error("Failed to send message. Please try WhatsApp instead.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const contactInfo = [
@@ -86,7 +110,9 @@ export default function Contact() {
                     className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all resize-none"
                   />
                 </div>
-                <button type="submit" className="btn-accent-brand w-full text-center text-lg">Send Message</button>
+                <button type="submit" disabled={sending} className="btn-accent-brand w-full text-center text-lg disabled:opacity-60">
+                  {sending ? "Sending..." : "Send Message"}
+                </button>
               </form>
             </ScrollReveal>
           </div>

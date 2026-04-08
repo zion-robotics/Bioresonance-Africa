@@ -2,16 +2,40 @@ import { useState } from "react";
 import { toast } from "sonner";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
 
 export default function BookAppointment() {
   const [form, setForm] = useState({
     name: "", email: "", phone: "", type: "physical", date: "", time: "", condition: "", message: "",
   });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Appointment request submitted! We'll confirm shortly.");
-    setForm({ name: "", email: "", phone: "", type: "physical", date: "", time: "", condition: "", message: "" });
+    setSending(true);
+    try {
+      await sendAdminNotification({
+        form_type: "Appointment Booking",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+        location: "",
+        message: `Type: ${form.type}\nDate: ${form.date}\nTime: ${form.time}\nCondition: ${form.condition}\n\n${form.message}`,
+        date: new Date().toLocaleDateString(),
+      });
+      await sendConfirmation({
+        form_type: "appointment booking",
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+      });
+      toast.success("Appointment request submitted! We'll confirm within 24 hours.");
+      setForm({ name: "", email: "", phone: "", type: "physical", date: "", time: "", condition: "", message: "" });
+    } catch {
+      toast.error("Failed to submit. Please try WhatsApp instead.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -119,8 +143,8 @@ export default function BookAppointment() {
                 />
               </div>
 
-              <button type="submit" className="btn-accent-brand w-full text-center text-lg">
-                Book Appointment
+              <button type="submit" disabled={sending} className="btn-accent-brand w-full text-center text-lg disabled:opacity-60">
+                {sending ? "Submitting..." : "Book Appointment"}
               </button>
             </form>
           </ScrollReveal>
