@@ -137,7 +137,7 @@ export default function Services() {
                 </p>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img src={helpImg} alt="Bioresonance healing" className="w-full h-80 object-cover" loading="lazy" />
+                <img src={helpImg} alt="Bioresonance healing" className="w-full h-auto object-contain" loading="lazy" />
               </div>
             </div>
           </ScrollReveal>

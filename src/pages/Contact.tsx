@@ -181,19 +181,35 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 whileHover={{ x: 6, scale: 1.02 }}
-                className="group relative bg-card rounded-2xl p-5 border border-border shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                className="group relative"
               >
-                <div className={`absolute inset-0 bg-gradient-to-r ${c.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center mb-3 shadow-md`}>
-                  <c.icon size={18} className="text-white" />
-                </div>
-                <p className="text-xs text-muted-foreground font-body uppercase tracking-widest mb-1">{c.label}</p>
                 {c.href ? (
-                  <a href={c.href} target="_blank" rel="noopener noreferrer" className="font-heading font-semibold text-foreground hover:text-deep-blue transition-colors text-sm">
-                    {c.value}
+                  <a 
+                    href={c.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block bg-card rounded-2xl p-5 border border-border shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${c.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center mb-3 shadow-md`}>
+                      <c.icon size={18} className="text-white" />
+                    </div>
+                    <p className="text-xs text-muted-foreground font-body uppercase tracking-widest mb-1">{c.label}</p>
+                    <p className="font-heading font-semibold text-foreground hover:text-deep-blue transition-colors text-sm">
+                      {c.value}
+                    </p>
                   </a>
                 ) : (
-                  <p className="font-heading font-semibold text-foreground text-sm">{c.value}</p>
+                  <div className="bg-card rounded-2xl p-5 border border-border shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${c.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center mb-3 shadow-md`}>
+                      <c.icon size={18} className="text-white" />
+                    </div>
+                    <p className="text-xs text-muted-foreground font-body uppercase tracking-widest mb-1">{c.label}</p>
+                    <p className="font-heading font-semibold text-foreground text-sm">
+                      {c.value}
+                    </p>
+                  </div>
                 )}
               </motion.div>
             ))}
