@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import logo from "@/assets/bio_logo.jpeg";
+import { sendAdminNotification } from "@/lib/emailjs";
 
 const quickLinks = [
   { name: "Home", path: "/" },
@@ -16,6 +19,32 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSending(true);
+    try {
+      await sendAdminNotification({
+        form_type: "Newsletter Subscription",
+        from_name: "Newsletter Subscriber",
+        from_email: email,
+        phone: "",
+        location: "",
+        message: `New newsletter subscription from: ${email}`,
+        date: new Date().toLocaleDateString(),
+      });
+      toast.success("Subscribed! Thank you for joining.");
+      setEmail("");
+    } catch {
+      toast.error("Failed to subscribe. Please try again.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <footer className="bg-navy text-navy-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -38,10 +67,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-sm text-navy-foreground/60 hover:text-gold transition-colors duration-300 font-body"
-                  >
+                  <Link to={link.path} className="text-sm text-navy-foreground/60 hover:text-gold transition-colors duration-300 font-body">
                     {link.name}
                   </Link>
                 </li>
@@ -53,26 +79,10 @@ export default function Footer() {
             <h4 className="font-heading font-semibold text-sm uppercase tracking-widest mb-4 text-gold">Contact</h4>
             <ul className="space-y-3 text-sm text-navy-foreground/60 font-body">
               <li>Lagos, Nigeria</li>
-              <li>
-                <a href="tel:+2348033030614" className="hover:text-gold transition-colors">
-                  +234 803 303 0614
-                </a>
-              </li>
-              <li>
-                <a href="mailto:1stbionic@gmail.com" className="hover:text-gold transition-colors">
-                  1stbionic@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
-                  WhatsApp
-                </a>
-              </li>
-              <li>
-                <a href="https://m.facebook.com/groups/187395870824739/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
-                  Facebook Group
-                </a>
-              </li>
+              <li><a href="tel:+2348033030614" className="hover:text-gold transition-colors">+234 803 303 0614</a></li>
+              <li><a href="mailto:1stbionic@gmail.com" className="hover:text-gold transition-colors">1stbionic@gmail.com</a></li>
+              <li><a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">WhatsApp</a></li>
+              <li><a href="https://m.facebook.com/groups/187395870824739/" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Facebook Group</a></li>
             </ul>
           </div>
 
@@ -81,14 +91,17 @@ export default function Footer() {
             <p className="text-sm text-navy-foreground/60 font-body mb-4">
               Stay updated with the latest in frequency medicine.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
+            <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
               <input
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="px-4 py-3 rounded-lg bg-navy-foreground/10 border border-navy-foreground/10 text-navy-foreground placeholder:text-navy-foreground/30 text-sm font-body focus:outline-none focus:border-gold transition-colors"
               />
-              <button type="submit" className="btn-accent-brand !py-3 text-sm">
-                Subscribe
+              <button type="submit" disabled={sending} className="btn-accent-brand !py-3 text-sm disabled:opacity-60">
+                {sending ? "Subscribing..." : "Subscribe"}
               </button>
             </form>
           </div>
@@ -99,12 +112,8 @@ export default function Footer() {
             © {new Date().getFullYear()} Bioresonance Africa. Bionic© and Biopita© All rights reserved. Founded by Oludele SKO — 1st Bioresonanceist of Africa©
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">
-              WhatsApp
-            </a>
-            <a href="https://m.facebook.com/groups/187395870824739/" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">
-              Facebook
-            </a>
+            <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">WhatsApp</a>
+            <a href="https://m.facebook.com/groups/187395870824739/" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">Facebook</a>
           </div>
         </div>
       </div>
