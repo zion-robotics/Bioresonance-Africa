@@ -84,7 +84,9 @@ export default function ProductDetail() {
 
                 <button className="btn-accent-brand w-full text-center text-lg flex items-center justify-center gap-3">
                   <ShoppingCart size={20} />
-                  Order Now — {product.price}
+                  <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer">
+                    Order Now — {product.price}
+                  </a>
                 </button>
 
                 <div className="mt-6 flex items-center justify-center gap-6">
