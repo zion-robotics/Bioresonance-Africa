@@ -8,6 +8,8 @@ import SEOHead from "@/components/SEOHead";
 import genB from "@/assets/gen_b.jpeg";
 import { client } from "@/lib/sanity";
 import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
+import PhoneInput from "@/components/PhoneInput";
+import CountrySelect from "@/components/CountrySelect";
 
 interface TrainingProgram {
   _id: string;
@@ -70,7 +72,7 @@ function ProgramCard({ prog, index }: { prog: TrainingProgram; index: number }) 
 
 function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "",
+    name: "", email: "", phone: "", country: "", program: "", format: "", hearAbout: "", message: "",
   });
   const [sending, setSending] = useState(false);
 
@@ -83,8 +85,8 @@ function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
         from_name: form.name,
         from_email: form.email,
         phone: form.phone,
-        location: form.location,
-        message: `Program: ${form.program}\nFormat: ${form.format}\nHow they heard: ${form.hearAbout}\n\n${form.message}`,
+        location: form.country,
+        message: `Program: ${form.program}\nFormat: ${form.format}\nHeard about us: ${form.hearAbout}\n\n${form.message}`,
         date: new Date().toLocaleDateString(),
       });
       await sendConfirmation({
@@ -94,7 +96,7 @@ function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
         phone: form.phone,
       });
       toast.success("Enrollment submitted! We'll contact you within 24 hours.");
-      setForm({ name: "", email: "", phone: "", location: "", program: "", format: "", hearAbout: "", message: "" });
+      setForm({ name: "", email: "", phone: "", country: "", program: "", format: "", hearAbout: "", message: "" });
     } catch {
       toast.error("Failed to submit. Please try WhatsApp instead.");
     } finally {
@@ -102,69 +104,91 @@ function EnrollmentForm({ programs }: { programs: TrainingProgram[] }) {
     }
   };
 
-  const handleChange = (key: string, value: string) => setForm((prev) => ({ ...prev, [key]: value }));
   const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all";
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 40, rotateX: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      rotateX: 0, 
+      transition: { duration: 0.7 }
+    },
+  };
+
+  const fieldVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.08, duration: 0.4 } }),
+  };
 
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="space-y-5 rounded-2xl border border-border p-8 bg-light-blue"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={formVariants}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      className="space-y-5 rounded-2xl border border-border p-8 bg-light-blue shadow-xl"
     >
-      {[
-        { key: "name", label: "Full Name", type: "text", required: true },
-        { key: "email", label: "Email Address", type: "email", required: true },
-        { key: "phone", label: "Phone Number", type: "tel", required: true },
-        { key: "location", label: "Location / Country", type: "text", required: true },
-      ].map(({ key, label, type, required }) => (
-        <div key={key}>
-          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">{label}</label>
-          <input type={type} value={form[key as keyof typeof form]} onChange={(e) => handleChange(key, e.target.value)} required={required} placeholder={label} className={inputClass} />
-        </div>
-      ))}
+        {[
+          { key: "name", label: "Full Name", type: "text", i: 0 },
+          { key: "email", label: "Email Address", type: "email", i: 1 },
+        ].map(({ key, label, type, i }) => (
+          <motion.div key={key} custom={i} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <label className="block text-sm font-heading font-medium text-foreground mb-1.5">{label}</label>
+            <input type={type} value={form[key as keyof typeof form]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} required placeholder={label} className={inputClass} />
+          </motion.div>
+        ))}
 
-      <div>
-        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
-        <select value={form.program} onChange={(e) => handleChange("program", e.target.value)} required title="Select a program" className={inputClass}>
-          <option value="">Select a program</option>
-          {programs.filter(p => p.isOpen).map(p => (
-            <option key={p._id} value={p.title}>{p.title}</option>
-          ))}
-        </select>
-      </div>
+        <motion.div custom={2} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Phone Number</label>
+          <PhoneInput value={form.phone} onChange={(val) => setForm({ ...form, phone: val })} required />
+        </motion.div>
 
-      <div>
-        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Preferred Format</label>
-        <select value={form.format} onChange={(e) => handleChange("format", e.target.value)} required title="Select format" className={inputClass}>
-          <option value="">Select format</option>
-          <option value="Physical in Lagos">Physical in Lagos</option>
-          <option value="Online">Online</option>
-        </select>
-      </div>
+        <motion.div custom={3} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Country</label>
+          <CountrySelect value={form.country} onChange={(val) => setForm({ ...form, country: val })} required />
+        </motion.div>
 
-      <div>
-        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">How did you hear about us?</label>
-        <input type="text" value={form.hearAbout} onChange={(e) => handleChange("hearAbout", e.target.value)} placeholder="How did you hear about us?" className={inputClass} />
-      </div>
+        <motion.div custom={4} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Which program are you interested in?</label>
+          <select value={form.program} onChange={(e) => setForm({ ...form, program: e.target.value })} required title="Select a program" className={inputClass}>
+            <option value="">Select a program</option>
+            {programs.filter(p => p.isOpen).map(p => (
+              <option key={p._id} value={p.title}>{p.title}</option>
+            ))}
+          </select>
+        </motion.div>
 
-      <div>
-        <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Message or Questions</label>
-        <textarea value={form.message} onChange={(e) => handleChange("message", e.target.value)} rows={4} placeholder="Your message or questions..." className={`${inputClass} resize-none`} />
-      </div>
+        <motion.div custom={5} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Preferred Format</label>
+          <select value={form.format} onChange={(e) => setForm({ ...form, format: e.target.value })} required title="Select format" className={inputClass}>
+            <option value="">Select format</option>
+            <option value="Physical in Lagos">Physical in Lagos</option>
+            <option value="Online">Online</option>
+          </select>
+        </motion.div>
 
-      <motion.button
-        type="submit"
-        disabled={sending}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="btn-accent-brand w-full text-center text-lg disabled:opacity-60"
-      >
-        {sending ? "Submitting..." : "Begin My Journey"}
-      </motion.button>
-    </motion.form>
+        <motion.div custom={6} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">How did you hear about us?</label>
+          <input type="text" value={form.hearAbout} onChange={(e) => setForm({ ...form, hearAbout: e.target.value })} placeholder="How did you hear about us?" className={inputClass} />
+        </motion.div>
+
+        <motion.div custom={7} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <label className="block text-sm font-heading font-medium text-foreground mb-1.5">Message or Questions</label>
+          <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={4} placeholder="Your message or questions..." className={`${inputClass} resize-none`} />
+        </motion.div>
+
+        <motion.button
+          type="submit"
+          disabled={sending}
+          whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
+          whileTap={{ scale: 0.98 }}
+          className="btn-accent-brand w-full text-center text-lg disabled:opacity-60"
+        >
+          {sending ? "Submitting..." : "Begin My Journey"}
+        </motion.button>
+      </motion.form>
   );
 }
 

@@ -1,9 +1,29 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, MessageCircle, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import PhoneInput from "@/components/PhoneInput";
 import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
+
+const contactInfo = [
+  { icon: MapPin, label: "Address", value: "Lagos, Nigeria" },
+  { icon: Phone, label: "Phone", value: "+234 803 303 0614", href: "tel:+2348033030614" },
+  { icon: MessageCircle, label: "WhatsApp", value: "+234 803 303 0614", href: "https://wa.me/2348033030614" },
+  { icon: Mail, label: "Email", value: "1stbionic@gmail.com", href: "mailto:1stbionic@gmail.com" },
+  { icon: ExternalLink, label: "Facebook", value: "Bioresonance, the Holy Grail of Healing©", href: "https://m.facebook.com/groups/187395870824739/" },
+];
+
+const formVariants = {
+  hidden: { opacity: 0, y: 40, rotateX: 10 },
+  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const fieldVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: (i: number) => ({ opacity: 1, x: 0, transition: { delay: i * 0.08, duration: 0.4 } }),
+};
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
@@ -37,13 +57,7 @@ export default function Contact() {
     }
   };
 
-  const contactInfo = [
-    { icon: MapPin, label: "Address", value: "Lagos, Nigeria" },
-    { icon: Phone, label: "Phone", value: "+234 803 303 0614", href: "tel:+2348033030614" },
-    { icon: MessageCircle, label: "WhatsApp", value: "+234 803 303 0614", href: "https://wa.me/2348033030614" },
-    { icon: Mail, label: "Email", value: "1stbionic@gmail.com", href: "mailto:1stbionic@gmail.com" },
-    { icon: ExternalLink, label: "Facebook", value: "Bioresonance, the Holy Grail of Healing©", href: "https://m.facebook.com/groups/187395870824739/" },
-  ];
+  const inputClass = "w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all";
 
   return (
     <PageTransition>
@@ -61,7 +75,11 @@ export default function Contact() {
           <div className="space-y-6">
             {contactInfo.map((c, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-5 border border-border card-hover">
+                <motion.div
+                  whileHover={{ scale: 1.03, rotateY: 3 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  className="bg-card rounded-xl p-5 border border-border shadow-sm hover:shadow-lg transition-shadow"
+                >
                   <c.icon size={24} className="text-deep-blue mb-3" />
                   <p className="text-xs text-muted-foreground font-body uppercase tracking-widest mb-1">{c.label}</p>
                   {c.href ? (
@@ -71,50 +89,68 @@ export default function Contact() {
                   ) : (
                     <p className="font-heading font-semibold text-foreground">{c.value}</p>
                   )}
-                </div>
+                </motion.div>
               </ScrollReveal>
             ))}
           </div>
 
-          <div className="lg:col-span-2">
-            <ScrollReveal delay={0.2}>
-              <form onSubmit={handleSubmit} className="bg-card rounded-2xl p-8 border border-border space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {[
-                    { key: "name", label: "Full Name", type: "text" },
-                    { key: "email", label: "Email", type: "email" },
-                    { key: "phone", label: "Phone", type: "tel" },
-                    { key: "subject", label: "Subject", type: "text" },
-                  ].map(({ key, label, type }) => (
-                    <div key={key}>
-                      <label className="block text-sm font-body font-medium text-foreground mb-1">{label}</label>
-                      <input
-                        type={type}
-                        value={form[key as keyof typeof form]}
-                        onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                        placeholder={label}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <label className="block text-sm font-body font-medium text-foreground mb-1">Message</label>
-                  <textarea
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Your message..."
-                    rows={5}
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-sm focus:outline-none focus:ring-2 focus:ring-deep-blue/30 transition-all resize-none"
-                  />
-                </div>
-                <button type="submit" disabled={sending} className="btn-accent-brand w-full text-center text-lg disabled:opacity-60">
-                  {sending ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            </ScrollReveal>
+          <div className="lg:col-span-2" style={{ perspective: "1000px" }}>
+            <motion.form
+              onSubmit={handleSubmit}
+              variants={formVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              style={{ transformStyle: "preserve-3d" }}
+              className="bg-card rounded-2xl p-8 border border-border space-y-5 shadow-xl"
+            >
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { key: "name", label: "Full Name", type: "text", i: 0 },
+                  { key: "email", label: "Email", type: "email", i: 1 },
+                  { key: "subject", label: "Subject", type: "text", i: 2 },
+                ].map(({ key, label, type, i }) => (
+                  <motion.div key={key} custom={i} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                    <label className="block text-sm font-body font-medium text-foreground mb-1">{label}</label>
+                    <input
+                      type={type}
+                      value={form[key as keyof typeof form]}
+                      onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                      placeholder={label}
+                      required
+                      className={inputClass}
+                    />
+                  </motion.div>
+                ))}
+
+                <motion.div custom={3} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <label className="block text-sm font-body font-medium text-foreground mb-1">Phone Number</label>
+                  <PhoneInput value={form.phone} onChange={(val) => setForm({ ...form, phone: val })} required />
+                </motion.div>
+              </div>
+
+              <motion.div custom={4} variants={fieldVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                <label className="block text-sm font-body font-medium text-foreground mb-1">Message</label>
+                <textarea
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Your message..."
+                  rows={5}
+                  required
+                  className={`${inputClass} resize-none`}
+                />
+              </motion.div>
+
+              <motion.button
+                type="submit"
+                disabled={sending}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-accent-brand w-full text-center text-lg disabled:opacity-60"
+              >
+                {sending ? "Sending..." : "Send Message"}
+              </motion.button>
+            </motion.form>
           </div>
         </div>
       </section>
