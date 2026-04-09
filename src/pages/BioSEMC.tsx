@@ -67,7 +67,7 @@ export default function BioSEMC() {
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <span className="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold text-xs font-heading font-semibold tracking-widest uppercase mb-6">
-              CSR Initiative · {data?.year || "2026"}
+              Yearly CSR Initiative: 1st of January to 30th of April
             </span>
             <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-navy-foreground mb-6">
               BioSEMC
