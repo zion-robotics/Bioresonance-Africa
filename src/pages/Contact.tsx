@@ -54,7 +54,6 @@ function FloatingInput({ label, type = "text", value, onChange, required, delay 
           onBlur={() => setFocused(false)}
           required={required}
           title={label}
-          placeholder={label}
           className="w-full px-4 pt-6 pb-2 bg-transparent font-body text-sm focus:outline-none text-foreground"
         />
       </div>
@@ -96,7 +95,6 @@ function FloatingTextarea({ label, value, onChange, required, delay }: {
           required={required}
           rows={5}
           title={label}
-          placeholder={label}
           className="w-full px-4 pt-8 pb-3 bg-transparent font-body text-sm focus:outline-none text-foreground resize-none"
         />
       </div>
