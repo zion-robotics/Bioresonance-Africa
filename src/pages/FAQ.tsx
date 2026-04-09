@@ -9,15 +9,15 @@ const faqs = [
   { q: "Is bioresonance safe?", a: "Yes. Bioresonance is completely non-invasive. No drugs, no surgery, no chemicals, no unpleasant intake. It works with the body's natural frequencies to restore balance." },
   { q: "How many conditions can bioresonance address?", a: "We address over 144 different conditions ranging from malaria and typhoid to chronic diseases, autoimmune disorders, and mental health challenges." },
   { q: "Can treatment be done remotely?", a: "Yes. Bioresonance enables remote and cross-border treatment through our Remote Black Box technology, integrating telemedicine seamlessly." },
-  { q: "Who founded Bioresonance Africa?", a: "Bioresonance Africa was founded by Oludele SKO, the 1st Bioresonanceist of Africa©, pioneering a decisive shift in digital curative medicine." },
+  { q: "Who founded Bioresonance Africa?", a: "Bioresonance, the Holy Grail of Healing©, was founded in Africa by Oludele Sunday Kolawole Olumide, also known as Oludele SKO, the 1st Bioresonanceist of Africa©, following a unique encounter with the Holy Spirit. This encounter provided clear instructions and guidelines, leading to a pioneering and decisive shift in the digital curative paradigm that restores hope of true recovery to healthcare users." },
   { q: "What is Bionic©?", a: "Bionic© is a specialised version of the bioresonance clinic, engineered for precision intervention and root-cause correction using digital frequency medicine." },
   { q: "What is Biopita©?", a: "Biopita© is a structured version of a bioresonance hospital, designed for scale, coordination, and advanced care delivery with multiple Bionic© units." },
   { q: "What products do you offer?", a: "We offer the Original NLS Meta Hunter 4025, the Meta Hunter + Remote Black Box Bundle, and the exclusive Energy Trapper — all professional-grade bioresonance equipment." },
   { q: "How do I become a Gen-B Healer?", a: "Visit our Training page to enroll in the Gen-B Healers program, trained directly by the 1st Bioresonanceist of Africa©." },
-  { q: "How do I book an appointment?", a: "Click 'Book Appointment' on our website or contact us via WhatsApp at +234 803 303 0614 to schedule your consultation." },
+  { q: "How do I book an appointment?", a: (<>Click 'Book an Appointment' on our website or contact us via <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold/80 underline font-semibold">WhatsApp</a> to schedule your consultation.</>) },
 ];
 
-function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boolean; toggle: () => void }) {
+function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string | React.ReactNode; isOpen: boolean; toggle: () => void }) {
   return (
     <div className="border border-border rounded-xl overflow-hidden card-hover">
       <button
@@ -38,7 +38,7 @@ function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boole
             transition={{ duration: 0.3 }}
           >
             <div className="px-5 pb-5">
-              <p className="text-sm text-muted-foreground font-body leading-relaxed">{a}</p>
+              <div className="text-sm text-muted-foreground font-body leading-relaxed">{a}</div>
             </div>
           </motion.div>
         )}

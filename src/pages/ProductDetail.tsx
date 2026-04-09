@@ -16,10 +16,10 @@ const productData: Record<string, { name: string; price: string; image: string; 
     features: ["Full frequency blast technology", "Professional-grade NLS diagnostics", "Comprehensive body scanning", "Precision frequency delivery"],
   },
   "meta-hunter-bundle": {
-    name: "Meta Hunter + Remote Black Box Bundle",
+    name: "Remote Black Box",
     price: "₦800,000",
     image: blackBox,
-    desc: "Complete diagnostic set including the Meta Hunter device, headphones and Remote Black Box for remote and cross-border bioresonance treatment.",
+    desc: "A transformative device for all brands of NLS. Transforming a localised NLS device and medical services into a remote diagnostic scanner for trans-border treatment.",
     features: ["Meta Hunter device included", "Remote Black Box for distance healing", "Cross-border treatment capability", "Professional headphones included"],
   },
   "energy-trapper": {
@@ -27,7 +27,7 @@ const productData: Record<string, { name: string; price: string; image: string; 
     price: "₦25,000",
     image: energyTrapper,
     desc: "A frequency concentration product. The exclusive toolset of the 1st Bioresonanceist of Africa©. Compatible with all brands of NLS. Not sold anywhere else.",
-    features: ["Frequency concentration technology", "Compatible with all NLS brands", "Exclusive to Bioresonance Africa", "Portable and easy to use"],
+    features: ["Frequency concentration technology", "Compatible with all NLS brands", "Exclusive to the 1st Bioresonanceist of Africa©", "Portable and easy to use"],
   },
 };
 

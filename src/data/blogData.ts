@@ -29,7 +29,7 @@ This is not guesswork. It is precise, measurable, and reproducible science. The 
 
 ## The African Pioneer
 
-Oludele SKO, the 1st Bioresonanceist of Africa©, has brought this revolutionary technology to the continent and refined it through years of clinical practice. His work has demonstrated that frequency-based medicine can address over 144 conditions — from chronic diseases to acute infections — without drugs, surgery, or chemicals.
+Oludele Sunday Kolawole Olumide (aka Oludele SKO), the 1st Bioresonanceist of Africa©, has brought this revolutionary technology to the continent and refined it through years of clinical practice. His work has demonstrated that frequency-based medicine can address over 144 conditions — from chronic diseases to acute infections — without drugs, surgery, or chemicals.
 
 ## Why This Matters
 

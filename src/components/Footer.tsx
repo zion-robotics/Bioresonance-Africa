@@ -15,7 +15,7 @@ const quickLinks = [
   { name: "Blog", path: "/blog" },
   { name: "FAQ", path: "/faq" },
   { name: "Contact", path: "/contact" },
-  { name: "Book Appointment", path: "/book-appointment" },
+  { name: "Book an Appointment", path: "/book-appointment" },
 ];
 
 export default function Footer() {
@@ -53,7 +53,7 @@ export default function Footer() {
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img src={logo} alt="Logo" className="h-12 w-12 rounded-full object-cover" />
               <div>
-                <span className="font-heading font-bold text-lg">Bioresonance</span>
+                <span className="font-heading font-bold text-lg">Bioresonance, the Holy Grail of Healing.</span>
                 <span className="block text-xs tracking-widest uppercase text-navy-foreground/60">Africa</span>
               </div>
             </Link>
@@ -109,7 +109,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-navy-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-navy-foreground/40 font-body text-center md:text-left">
-            © {new Date().getFullYear()} Bioresonance Africa. Bionic© and Biopita© All rights reserved. Founded by Oludele SKO — 1st Bioresonanceist of Africa©
+            © {new Date().getFullYear()} Bioresonance Africa. Bionic© and Biopita© All rights reserved. Founded by Oludele Sunday Kolawole Olumide (aka Oludele SKO) — 1st Bioresonanceist of Africa©
           </p>
           <div className="flex items-center gap-4">
             <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">WhatsApp</a>

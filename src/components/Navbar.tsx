@@ -53,7 +53,7 @@ export default function Navbar() {
                 alt="Bioresonance Africa Logo"
                 className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="hidden sm:block">
+             <div className="hidden sm:block">
                 <span className={`font-heading font-bold text-lg tracking-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
@@ -63,6 +63,11 @@ export default function Navbar() {
                   scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
                 }`}>
                   Africa
+                </span>
+                <span className={`block text-xs font-body italic transition-colors duration-300 ${
+                  scrolled ? "text-deep-blue" : "text-gold"
+                }`}>
+                  You are not a patient. You are a survivor.
                 </span>
               </div>
             </Link>
@@ -159,7 +164,7 @@ export default function Navbar() {
                     to="/book-appointment"
                     className="btn-accent-brand block text-center !py-3"
                   >
-                    Book Appointment
+                    Book an Appointment
                   </Link>
                 </motion.div>
               </div>

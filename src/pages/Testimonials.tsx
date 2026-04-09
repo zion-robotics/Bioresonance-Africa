@@ -107,7 +107,7 @@ export default function Testimonials() {
       <section className="section-padding bg-card">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
-            <h2 className="heading-display text-3xl text-center text-foreground mb-10">Life After Bioresonance</h2>
+            <h2 className="heading-display text-3xl text-center text-foreground mb-10">Life After Bioresonance, the Holy Grail of Healing.</h2>
           </ScrollReveal>
           <div className="grid md:grid-cols-2 gap-8">
             {[joyImg, joy2Img].map((img, i) => (

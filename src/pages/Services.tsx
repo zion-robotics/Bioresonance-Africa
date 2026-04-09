@@ -104,7 +104,7 @@ export default function Services() {
               Bionic© and Biopita© together form a complete ecosystem, both driven by the same mandate: to eliminate root causes and redefine the future of medicine.
             </p>
             <p className="text-navy-foreground/70 font-body text-sm leading-relaxed">
-              Bioresonance, the Holy Grail of Healing© is reshaping the future of medicine. From patient to survivor©, Hospital to Biopita©, Clinic to Bionic© and analogue to digital.
+              Bioresonance, the Holy Grail of Healing© is reshaping the future of medicine. From patient to Survivor©, Hospital to Biopita©, Clinic to Bionic© and analogue medicine to digital medicine. Physical clinical appointments to telemedicine/remote treatment.
             </p>
           </ScrollReveal>
         </div>

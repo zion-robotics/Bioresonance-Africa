@@ -15,10 +15,10 @@ export default function About() {
           <ScrollReveal>
             <span className="text-sm font-body font-medium text-gold uppercase tracking-widest">Our Story</span>
             <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-navy-foreground mt-4">
-              About Bioresonance Africa
+              About Bioresonance, the Holy Grail of Healing©, Africa
             </h1>
             <p className="text-navy-foreground/60 font-body text-lg mt-6 max-w-2xl mx-auto">
-              Founded by Oludele SKO — the 1st Bioresonanceist of Africa©
+              Founded by Oludele Sunday Kolawole Olumide (aka Oludele SKO). Divinely inspired in 2004, Mandated in 2020. Spiritually trained in 2023.
             </p>
           </ScrollReveal>
         </div>
@@ -53,7 +53,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-8">
-              <h2 className="heading-display text-3xl text-foreground mb-4">How Bioresonance Works</h2>
+              <h2 className="heading-display text-3xl text-foreground mb-4">How Bioresonance, the Holy Grail of Healing. Works</h2>
               <p className="text-foreground/60 font-body">Understanding frequency distortion and restoration</p>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl border border-border">

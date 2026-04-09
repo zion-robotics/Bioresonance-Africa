@@ -44,8 +44,8 @@ export default function BioSEMC() {
       .catch(() => {});
   }, []);
 
-  const startDate = data?.startDate ? new Date(data.startDate).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "8 April 2026";
-  const endDate = data?.endDate ? new Date(data.endDate).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "30 July 2026";
+  const startDate = data?.startDate ? new Date(data.startDate).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "1 January 2026";
+  const endDate = data?.endDate ? new Date(data.endDate).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "30 April 2026";
   const price = data?.price || "₦100,000 or $100 per month";
   const isOpen = data?.isOpen !== undefined ? data.isOpen : true;
   const specialNotes = data?.specialNotes || "As this is the introductory year, the programme starts later than usual. The extended window provides an opportunity for wider participation. Please inform your loved ones and use this opportunity for your children and household members.";

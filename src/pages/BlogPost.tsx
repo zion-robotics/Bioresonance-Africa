@@ -114,7 +114,7 @@ export default function BlogPost() {
                 <span className="text-sm text-muted-foreground font-body">Share this article</span>
               </div>
               <Link to="/book-appointment" className="btn-accent-brand !py-2.5 !px-6 text-sm">
-                Book Appointment
+                Book an Appointment
               </Link>
             </div>
           </ScrollReveal>

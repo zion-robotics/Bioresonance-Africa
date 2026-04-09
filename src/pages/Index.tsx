@@ -18,7 +18,7 @@ import blackBox from "@/assets/black_box.jpeg";
 
 const stats = [
   { value: 100, suffix: "+", label: "Conditions Treated" },
-  { value: 50, suffix: "+", label: "Lives Transformed" },
+  { value: 100, suffix: "+", label: "Lives Transformed" },
   { value: 100, suffix: "%", label: "Non-Invasive" },
 ];
 
@@ -225,7 +225,7 @@ export default function Index() {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <AnimatedHeroButton to="/book-appointment" variant="accent" delay={5}>
-                  Book Appointment
+                  Book an Appointment
                 </AnimatedHeroButton>
                 <AnimatedHeroButton to="/services" variant="primary" delay={5.2}>
                   Get Started Today
@@ -336,7 +336,7 @@ export default function Index() {
                   loading="lazy"
                 />
                 <div className="bg-card p-4 text-center">
-                  <p className="text-sm font-heading font-semibold text-foreground">How Bioresonance Works</p>
+                  <p className="text-sm font-heading font-semibold text-foreground">How Bioresonance, the Holy Grail of Healing. Works</p>
                   <p className="text-xs text-muted-foreground font-body mt-1">Identifying and correcting frequency distortions in the body</p>
                 </div>
               </div>

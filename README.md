@@ -1,9 +1,9 @@
-# Bioresonance Africa
+# Bioresonance, the Holy Grail of Healing. Africa
 
-> **Africa's First Bioresonance Medical Brand**  
+> **Africa's First Bioresonance, the Holy Grail of Healing. Medical Brand**  
 > Digital Frequency Medicine | Non-Invasive Healing | Root-Cause Solutions
 
-[Visit Website](https://1stBioresonanceistofAfrica.com) · [Book Appointment](https://1stBioresonanceistofAfrica.com/book-appointment) · [Contact](https://1stBioresonanceistofAfrica.com/contact)
+[Visit Website](https://1stBioresonanceistofAfrica.com) · [Book an Appointment](https://1stBioresonanceistofAfrica.com/book-appointment) · [Contact](https://1stBioresonanceistofAfrica.com/contact)
 
 ---
 

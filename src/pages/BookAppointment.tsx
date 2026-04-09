@@ -210,7 +210,7 @@ export default function BookAppointment() {
                       </div>
                     </motion.div>
 
-                    <FloatingInput label="Condition / Concern" value={form.condition} onChange={(v) => setForm({ ...form, condition: v })} placeholder="Describe your condition" delay={0.4} />
+                    <FloatingInput label="Condition / Concern / Complaint" value={form.condition} onChange={(v) => setForm({ ...form, condition: v })} placeholder="List your complaints" delay={0.4} />
                     <FloatingInput label="Additional Message" value={form.message} onChange={(v) => setForm({ ...form, message: v })} placeholder="Any extra details..." delay={0.45} />
 
                     <motion.button
@@ -233,7 +233,7 @@ export default function BookAppointment() {
                             Submitting...
                           </>
                         ) : (
-                          <><CalendarCheck size={18} /> Book Appointment</>
+                          <><CalendarCheck size={18} /> Book an Appointment</>
                         )}
                       </span>
                     </motion.button>

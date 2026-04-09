@@ -297,7 +297,7 @@ export default function Training() {
             <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-navy-foreground mt-4">Become a Gen-B Healer</h1>
             <p className="text-xl text-gold font-display italic mt-4">Trained by the 1st Bioresonanceist of Africa©</p>
             <p className="text-navy-foreground/60 font-body text-lg mt-6 max-w-2xl mx-auto">
-              Our training is designed for practitioners and individuals who have an interest in digital and electronic medicine.
+              Our training is designed for practitioners and individuals who have an interest in digital and energy machine.
             </p>
           </ScrollReveal>
         </div>
