@@ -53,7 +53,7 @@ export default function Navbar() {
                 alt="Bioresonance Africa Logo"
                 className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-             <div className="hidden sm:block">
+             <div className="block">
                 <span className={`font-heading font-bold text-lg tracking-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
