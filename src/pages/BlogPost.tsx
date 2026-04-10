@@ -113,7 +113,33 @@ export default function BlogPost() {
         <div className="max-w-3xl mx-auto">
           <ScrollReveal>
             <div className="prose prose-lg max-w-none text-foreground/70 font-body">
-              {post.body && <PortableText value={post.body} />}
+              {post.body && (
+                <PortableText
+                  value={post.body}
+                  components={{
+                    block: {
+                      normal: ({children}) => <p className="font-body text-base leading-relaxed mb-4 text-foreground/70">{children}</p>,
+                      h1: ({children}) => <h1 className="font-heading font-bold text-3xl text-foreground mt-8 mb-4">{children}</h1>,
+                      h2: ({children}) => <h2 className="font-heading font-bold text-2xl text-foreground mt-8 mb-4">{children}</h2>,
+                      h3: ({children}) => <h3 className="font-heading font-bold text-xl text-foreground mt-6 mb-3">{children}</h3>,
+                      blockquote: ({children}) => <blockquote className="border-l-4 border-gold pl-6 py-2 my-6 italic text-muted-foreground font-body">{children}</blockquote>,
+                    },
+                    marks: {
+                      strong: ({children}) => <strong className="font-heading font-bold text-foreground">{children}</strong>,
+                      em: ({children}) => <em className="italic text-foreground/80">{children}</em>,
+                      link: ({value, children}) => <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-deep-blue underline hover:text-gold transition-colors font-body">{children}</a>,
+                    },
+                    list: {
+                      bullet: ({children}) => <ul className="list-disc list-inside mb-4 space-y-2 font-body text-foreground/70">{children}</ul>,
+                      number: ({children}) => <ol className="list-decimal list-inside mb-4 space-y-2 font-body text-foreground/70">{children}</ol>,
+                    },
+                    listItem: {
+                      bullet: ({children}) => <li className="font-body text-base leading-relaxed">{children}</li>,
+                      number: ({children}) => <li className="font-body text-base leading-relaxed">{children}</li>,
+                    },
+                  }}
+                />
+              )}
             </div>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>

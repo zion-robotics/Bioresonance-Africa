@@ -53,7 +53,7 @@ export default function Footer() {
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img src={logo} alt="Logo" className="h-12 w-12 rounded-full object-cover" />
               <div>
-                <span className="font-heading font-bold text-lg">Bioresonance, the Holy Grail of Healing.</span>
+                <span className="font-heading font-bold text-sm md:text-lg whitespace-nowrap">Bioresonance, the Holy Grail of Healing©.</span>
                 <span className="block text-xs tracking-widest uppercase text-navy-foreground/60">Africa</span>
               </div>
             </Link>
