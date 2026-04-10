@@ -48,17 +48,25 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
               <img
                 src={logo}
                 alt="Bioresonance Africa Logo"
-                className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110 flex-shrink-0"
               />
-              <div className="max-w-[180px] sm:max-w-[220px] md:max-w-xs">
-                <span className={`font-heading font-bold text-[10px] sm:text-xs md:text-sm leading-tight transition-colors duration-300 ${
+              <div className="flex flex-col">
+                <span className={`font-heading font-bold text-sm md:text-base leading-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
-                  Bioresonance, the Holy Grail of Healing©.
+                  Bioresonance
+                </span>
+                <span className={`font-body text-[10px] uppercase tracking-widest transition-colors duration-300 ${
+                  scrolled ? "text-muted-foreground" : "text-primary-foreground/60"
+                }`}>
+                  AFRICA
+                </span>
+                <span className="font-body italic text-[10px] md:text-xs leading-tight text-gold">
+                  You are not a patient. You are a survivor.
                 </span>
               </div>
             </Link>
