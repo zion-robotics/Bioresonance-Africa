@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Training", path: "/training" },
   { name: "BioSEMC", path: "/biosemc" },
   { name: "Blog", path: "/blog" },
+  { name: "Stroke", path: "/stroke-rehabilitation" },
   { name: "Testimonials", path: "/testimonials" },
   { name: "FAQ", path: "/faq" },
   { name: "Contact", path: "/contact" },

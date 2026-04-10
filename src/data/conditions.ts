@@ -143,3 +143,5 @@ export const conditions = [
   { name: "Frequency Balancing", desc: "Full body frequency harmonization", details: "Frequency imbalance causes dysfunction across multiple systems. Bioresonance performs precise full-body frequency scanning and rebalancing, restoring complete harmonic resonance." },
   { name: "Comprehensive Body Scan", desc: "Complete energetic assessment", details: "Frequency scanning is chemical-free, non-invasive, natural, and precise. Instead of a blood sample, our bioresonance frequency medical checkup uses 'DNA specimens' (Finger and leg nails, body sweat, saliva or urine, etc.). You are not expected at our bionic once any of the DNA samples is dispatched to our frequency laboratory. After a free scan, a report will be sent to the applicant's WhatsApp number. The cost of treatment will be in the report. The treatment plan will follow. Everything remote (visit is optional). Supporting therapies will only be recommended for conditions affecting the skeleton, muscular cell degeneration, displacement, dislocation, injury, pain, palpitation, breast cancer, etc." },
 ];
+
+conditions.sort((a, b) => a.name.localeCompare(b.name));

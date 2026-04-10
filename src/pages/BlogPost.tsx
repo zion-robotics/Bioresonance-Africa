@@ -5,7 +5,7 @@ import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { ArrowLeft, Calendar, Clock, Tag, Share2 } from "lucide-react";
-import { client } from "@/lib/sanity";
+import { client, urlFor } from "@/lib/sanity";
 
 interface BlogPost {
   _id: string;
@@ -17,6 +17,7 @@ interface BlogPost {
   category: string;
   readTime: string;
   body: PortableTextBlock[];
+  mainImage?: { asset: { _ref: string } };
 }
 
 export default function BlogPost() {
@@ -27,7 +28,7 @@ export default function BlogPost() {
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "blog" && slug.current == $slug][0]`, { slug })
+      .fetch(`*[_type == "blog" && slug.current == $slug][0] { _id, title, slug, author, publishedAt, excerpt, category, readTime, body, mainImage }`, { slug })
       .then((data) => {
         setPost(data);
         return client.fetch(
@@ -96,6 +97,13 @@ export default function BlogPost() {
                 <p className="text-xs text-navy-foreground/50 font-body">1st Bioresonanceist of Africa©</p>
               </div>
             </div>
+            {post.mainImage && (
+              <ScrollReveal delay={0.1}>
+                <div className="mt-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                  <img src={urlFor(post.mainImage).width(1200).url()} alt={post.title} className="w-full h-auto object-cover max-h-[500px]" />
+                </div>
+              </ScrollReveal>
+            )}
           </ScrollReveal>
         </div>
       </section>

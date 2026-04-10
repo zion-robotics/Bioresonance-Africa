@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { Calendar, Search, ArrowRight, Clock } from "lucide-react";
-import { client } from "@/lib/sanity";
+import { client, urlFor } from "@/lib/sanity";
 
 interface BlogPost {
   _id: string;
@@ -15,6 +15,7 @@ interface BlogPost {
   excerpt: string;
   category: string;
   readTime: string;
+  mainImage?: { asset: { _ref: string } };
 }
 
 export default function Blog() {
@@ -25,7 +26,7 @@ export default function Blog() {
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "blog"] | order(publishedAt desc)`)
+      .fetch(`*[_type == "blog"] | order(publishedAt desc) { _id, title, slug, author, publishedAt, excerpt, category, readTime, mainImage }`)
       .then((data) => {
         setBlogPosts(data);
         setLoading(false);
@@ -103,15 +104,21 @@ export default function Blog() {
                   className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500"
                 >
                   <div className="grid md:grid-cols-2">
-                    <div className="h-64 md:h-auto bg-gradient-to-br from-navy via-deep-blue to-navy flex items-center justify-center relative overflow-hidden">
-                      <motion.div
-                        animate={{ rotate: [0, 360] }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-64 h-64 border border-gold/10 rounded-full"
-                      />
-                      <span className="text-8xl font-heading font-bold text-gold/20 relative z-10">
-                        {filtered[0].title[0]}
-                      </span>
+                    <div className="h-64 md:h-auto relative overflow-hidden">
+                      {filtered[0].mainImage ? (
+                        <img src={urlFor(filtered[0].mainImage).width(800).url()} alt={filtered[0].title} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-navy via-deep-blue to-navy flex items-center justify-center">
+                          <motion.div
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="absolute w-64 h-64 border border-gold/10 rounded-full"
+                          />
+                          <span className="text-8xl font-heading font-bold text-gold/20 relative z-10">
+                            {filtered[0].title[0]}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-8 md:p-10 flex flex-col justify-center">
                       <div className="flex items-center gap-4 mb-4">
@@ -145,8 +152,14 @@ export default function Blog() {
                     whileHover={{ y: -6 }}
                     className="bg-card rounded-2xl border border-border overflow-hidden h-full flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-500"
                   >
-                    <div className="h-48 bg-gradient-to-br from-deep-blue/10 via-gold/5 to-deep-blue/10 flex items-center justify-center">
-                      <span className="text-6xl font-heading font-bold text-deep-blue/15">{post.title[0]}</span>
+                    <div className="h-48 overflow-hidden">
+                      {post.mainImage ? (
+                        <img src={urlFor(post.mainImage).width(600).url()} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-deep-blue/10 via-gold/5 to-deep-blue/10 flex items-center justify-center">
+                          <span className="text-6xl font-heading font-bold text-deep-blue/15">{post.title[0]}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-center gap-3 mb-3">

@@ -25,6 +25,7 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import BioSEMC from "./pages/BioSEMC";
+import StrokeRehabilitation from "./pages/StrokeRehabilitation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ function AnimatedRoutes() {
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/training" element={<Training />} />
         <Route path="/biosemc" element={<BioSEMC />} />
+        <Route path="/stroke-rehabilitation" element={<StrokeRehabilitation />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
