@@ -55,7 +55,7 @@ export default function Navbar() {
                 className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110 flex-shrink-0"
               />
               <div className="flex flex-col">
-                <span className={`font-heading font-bold text-sm md:text-base leading-tight transition-colors duration-300 ${
+                <span className={`font-heading font-bold text-xs md:text-sm leading-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
                   Bioresonance, the Holy Grail of Healing© 
