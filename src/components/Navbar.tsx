@@ -58,7 +58,7 @@ export default function Navbar() {
                 <span className={`font-heading font-bold text-sm md:text-base leading-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
-                  Bioresonance
+                  Bioresonance, the Holy Grail of Healing© 
                 </span>
                 <span className={`font-body text-[10px] uppercase tracking-widest transition-colors duration-300 ${
                   scrolled ? "text-muted-foreground" : "text-primary-foreground/60"
