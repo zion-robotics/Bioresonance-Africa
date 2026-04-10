@@ -53,10 +53,10 @@ const products = [
   },
   {
     id: "meta-hunter-bundle",
-    name: "Meta Hunter + Remote Black Box Bundle",
+    name: "Remote Black Box",
     price: "₦800,000",
     image: blackBox,
-    desc: "Complete diagnostic set including the Meta Hunter device.",
+    desc: "A transformative device for all brands of NLS. Transforming a localised NLS device and medical services into a remote diagnostic scanner for trans-border treatment.",
   },
   {
     id: "energy-trapper",
