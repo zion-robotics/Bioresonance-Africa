@@ -53,7 +53,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-8">
-              <h2 className="heading-display text-3xl text-foreground mb-4">How Bioresonance, the Holy Grail of Healing Works</h2>
+              <h2 className="heading-display text-3xl text-foreground mb-4">How Bioresonance, the Holy Grail of Healing© Works</h2>
               <p className="text-foreground/60 font-body">Understanding frequency distortion and restoration</p>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-xl border border-border">
