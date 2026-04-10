@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
 import { ArrowLeft, Calendar, Clock, Tag, Share2 } from "lucide-react";
 import { client, urlFor } from "@/lib/sanity";
+import { toast } from "sonner";
 
 interface BlogPost {
   _id: string;
@@ -117,10 +118,24 @@ export default function BlogPost() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div className="mt-12 pt-8 border-t border-border flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <button
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: post.title,
+                      text: post.excerpt,
+                      url: window.location.href,
+                    });
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    toast.success("Link copied to clipboard!");
+                  }
+                }}
+                className="flex items-center gap-3 text-muted-foreground hover:text-deep-blue transition-colors cursor-pointer"
+              >
                 <Share2 size={16} className="text-muted-foreground" />
                 <span className="text-sm text-muted-foreground font-body">Share this article</span>
-              </div>
+              </button>
               <Link to="/book-appointment" className="btn-accent-brand !py-2.5 !px-6 text-sm">
                 Book an Appointment
               </Link>
