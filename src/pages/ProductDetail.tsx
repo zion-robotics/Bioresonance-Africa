@@ -15,12 +15,24 @@ const productData: Record<string, { name: string; price: string; image: string; 
     desc: "The premium standalone NLS diagnostic device. Full frequency blast technology. The original toolset of the Bioresonanceists that distinguishes the pros and empowers the Gen-B healers.",
     features: ["Full frequency blast technology", "Professional-grade NLS diagnostics", "Comprehensive body scanning", "Precision frequency delivery"],
   },
+  "dual-combo": {
+  name: "Dual Combo Package",
+  price: "₦2,400,000",
+  image: metaHunter,
+  desc: "The ultimate professional package combo. Complete solution for local and remote bioresonance diagnostics and treatment.",
+  features: [
+    "Includes Original NLS Meta Hunter 4025",
+    
+    "Complete local and remote diagnostic solution",
+    "Cross-border treatment capability",
+  ],
+},
   "meta-hunter-bundle": {
     name: "Remote Black Box",
     price: "₦800,000",
     image: blackBox,
     desc: "A transformative device for all brands of NLS. Transforming a localised NLS device and medical services into a remote diagnostic scanner for trans-border treatment.",
-    features: ["Meta Hunter device included", "Remote Black Box for distance healing", "Cross-border treatment capability", "Professional headphones included"],
+    features: ["Remote Black Box for distance healing", "Cross-border treatment capability", "Professional headphones included"],
   },
   "energy-trapper": {
     name: "Energy Trapper",
