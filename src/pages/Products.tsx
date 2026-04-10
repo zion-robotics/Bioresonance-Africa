@@ -23,7 +23,7 @@ const products = [
     price: "₦2,400,000",
     priceNum: 2400000,
     image: metaHunter,
-    desc: "The ultimate professional package combining the Meta Hunter 4025 and Remote Black Box. Complete solution for local and remote bioresonance diagnostics and treatment.",
+    desc: "The ultimate professional package combo. Complete solution for local and remote bioresonance diagnostics and treatment.",
    },
   {
     id: "meta-hunter-bundle",
