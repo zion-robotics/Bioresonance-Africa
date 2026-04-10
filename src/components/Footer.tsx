@@ -49,11 +49,11 @@ export default function Footer() {
     <footer className="bg-navy text-navy-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 max-w-xs">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img src={logo} alt="Logo" className="h-12 w-12 rounded-full object-cover" />
               <div>
-                <span className="font-heading font-bold text-sm md:text-lg whitespace-nowrap">Bioresonance, the Holy Grail of Healing©.</span>
+                <span className="font-heading font-bold text-sm md:text-base lg:text-lg whitespace-nowrap">Bioresonance, the Holy Grail of Healing©.</span>
                 <span className="block text-xs tracking-widest uppercase text-navy-foreground/60">Africa</span>
               </div>
             </Link>
