@@ -54,21 +54,11 @@ export default function Navbar() {
                 alt="Bioresonance Africa Logo"
                 className="h-12 w-12 rounded-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-             <div className="block">
-                <span className={`font-heading font-bold text-lg tracking-tight transition-colors duration-300 ${
+              <div className="max-w-[180px] sm:max-w-[220px] md:max-w-xs">
+                <span className={`font-heading font-bold text-[10px] sm:text-xs md:text-sm leading-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-primary-foreground"
                 }`}>
-                  Bioresonance
-                </span>
-                <span className={`block text-xs font-body tracking-widest uppercase transition-colors duration-300 ${
-                  scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
-                }`}>
-                  Africa
-                </span>
-                <span className={`block text-xs font-body italic transition-colors duration-300 ${
-                  scrolled ? "text-deep-blue" : "text-gold"
-                }`}>
-                  You are not a patient. You are a survivor.
+                  Bioresonance, the Holy Grail of Healing©.
                 </span>
               </div>
             </Link>
