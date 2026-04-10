@@ -336,7 +336,7 @@ export default function Index() {
                   loading="lazy"
                 />
                 <div className="bg-card p-4 text-center">
-                  <p className="text-sm font-heading font-semibold text-foreground">How Bioresonance, the Holy Grail of Healing Works</p>
+                  <p className="text-sm font-heading font-semibold text-foreground">How Bioresonance, the Holy Grail of Healing© Works</p>
                   <p className="text-xs text-muted-foreground font-body mt-1">Identifying and correcting frequency distortions in the body</p>
                 </div>
               </div>
