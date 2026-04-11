@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import {
   AlertTriangle,
   CheckCircle,
@@ -41,6 +42,7 @@ const trainingBenefits = [
 export default function StrokeRehabilitation() {
   return (
     <PageTransition>
+      <SEOHead title="Stroke Rehabilitation" description="Emergency stroke care and rehabilitation training at Bionic©. 80-95% recovery rate if treated early. Learn how frequency medicine can prevent and cure stroke." path="/stroke-rehabilitation" />
       {/* HERO */}
       <section className="bg-navy pt-32 pb-20 relative overflow-hidden">
         <motion.div

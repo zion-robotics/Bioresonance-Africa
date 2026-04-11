@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { ArrowLeft, ShoppingCart, Shield, Zap, Globe } from "lucide-react";
 
 import metaHunter from "@/assets/meta_hunter.jpeg";
@@ -50,6 +51,7 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <PageTransition>
+        <SEOHead title="Product Not Found" description="The product you're looking for doesn't exist." path={`/products/${id}`} />
         <div className="min-h-screen flex items-center justify-center bg-card">
           <div className="text-center">
             <h1 className="heading-display text-3xl text-foreground mb-4">Product Not Found</h1>
@@ -62,6 +64,7 @@ export default function ProductDetail() {
 
   return (
     <PageTransition>
+      <SEOHead title={product.name} description={product.desc} path={`/products/${id}`} />
       <section className="bg-navy pt-32 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/products" className="inline-flex items-center gap-2 text-navy-foreground/60 hover:text-gold transition-colors font-body text-sm">

@@ -1,11 +1,13 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function OrderConfirmation() {
   return (
     <PageTransition>
+      <SEOHead title="Order Confirmed" description="Your order has been confirmed. We'll reach out via WhatsApp or email to confirm delivery details." path="/order-confirmation" />
       <section className="min-h-screen bg-light-blue flex items-center justify-center px-4">
         <ScrollReveal>
           <div className="bg-card rounded-2xl p-12 border border-border text-center max-w-lg">

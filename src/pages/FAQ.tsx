@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 
 const faqs = [
   { q: "What is bioresonance therapy?", a: "Bioresonance, the Holy Grail of Healing©, is a digital, frequency-based medical system that reads, interprets, and corrects the body's energetic signals with precision for all forms of diseases of natural origin." },
@@ -52,6 +53,7 @@ export default function FAQ() {
 
   return (
     <PageTransition>
+      <SEOHead title="Frequently Asked Questions" description="Learn about bioresonance therapy, treatment options, Gen-B Healers training, and products from Bioresonance Africa." path="/faq" />
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>

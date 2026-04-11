@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Phone, Mail, MessageCircle, ExternalLink, Send, CheckCircle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import PhoneInput from "@/components/PhoneInput";
 import { sendAdminNotification, sendConfirmation } from "@/lib/emailjs";
 
@@ -141,6 +142,7 @@ export default function Contact() {
 
   return (
     <PageTransition>
+      <SEOHead title="Contact Us" description="Get in touch with the 1st Bioresonanceist of Africa©. Contact via phone, email, WhatsApp, or our contact form." path="/contact" />
       {/* HERO */}
       <section className="bg-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0">

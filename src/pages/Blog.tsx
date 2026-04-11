@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { Calendar, Search, ArrowRight, Clock } from "lucide-react";
 import { client, urlFor } from "@/lib/sanity";
 
@@ -46,6 +47,7 @@ export default function Blog() {
 
   return (
     <PageTransition>
+      <SEOHead title="Blog & Insights" description="Articles on frequency medicine, bioresonance technology, and healthcare insights from the 1st Bioresonanceist of Africa©." path="/blog" />
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>

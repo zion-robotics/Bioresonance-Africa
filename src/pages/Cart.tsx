@@ -1,11 +1,13 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Cart() {
   return (
     <PageTransition>
+      <SEOHead title="Shopping Cart" description="View and manage your bioresonance equipment order." path="/cart" />
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>

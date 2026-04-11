@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import ScrollReveal from "@/components/ScrollReveal";
 import PageTransition from "@/components/PageTransition";
+import SEOHead from "@/components/SEOHead";
 import { ArrowLeft, Calendar, Clock, Tag, Share2 } from "lucide-react";
 import { client, urlFor } from "@/lib/sanity";
 import { toast } from "sonner";
@@ -47,6 +48,7 @@ export default function BlogPost() {
   if (loading) {
     return (
       <PageTransition>
+        <SEOHead title="Loading..." description="Loading article..." path={`/blog/${slug}`} />
         <div className="min-h-screen flex items-center justify-center">
           <p className="text-muted-foreground font-body">Loading article...</p>
         </div>
@@ -57,6 +59,7 @@ export default function BlogPost() {
   if (!post) {
     return (
       <PageTransition>
+        <SEOHead title="Article Not Found" description="The article you're looking for doesn't exist." path={`/blog/${slug}`} />
         <div className="min-h-screen flex items-center justify-center bg-card">
           <div className="text-center">
             <h1 className="heading-display text-3xl text-foreground mb-4">Article Not Found</h1>
@@ -69,6 +72,7 @@ export default function BlogPost() {
 
   return (
     <PageTransition>
+      <SEOHead title={post.title} description={post.excerpt} path={`/blog/${post.slug.current}`} />
       <section className="bg-navy pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/blog" className="inline-flex items-center gap-2 text-navy-foreground/60 hover:text-gold transition-colors font-body text-sm mb-8">
