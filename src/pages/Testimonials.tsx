@@ -46,7 +46,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <PageTransition>
-      <SEOHead title="Testimonials" description="Real stories of lives transformed through bioresonance, the Holy Grail of Healing©. From patienthood to survivorhood." path="/testimonials" />
+      <SEOHead title="Testimonials" description="Real stories of lives transformed through bioresonance, the Holy Grail of Healing© From patienthood to survivorhood." path="/testimonials" />
 
       {/* HERO */}
       <section className="bg-navy pt-32 pb-20">

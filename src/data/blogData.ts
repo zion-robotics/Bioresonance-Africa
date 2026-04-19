@@ -184,7 +184,7 @@ The future of healthcare is not just digital — it is frequency-based, remote-c
     date: "February 15, 2026",
     slug: "patienthood-to-survivorhood",
     readTime: "9 min read",
-    content: `The phrase "From Patienthood to Survivorhood" is not marketing language. It is the lived experience of hundreds of individuals who found resolution through bioresonance, the Holy Grail of Healing©.
+    content: `The phrase "From Patienthood to Survivorhood" is not marketing language. It is the lived experience of hundreds of individuals who found resolution through bioresonance, the Holy Grail of Healing©
 
 ## What Does Survivorhood Mean?
 
