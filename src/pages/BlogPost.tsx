@@ -48,7 +48,12 @@ export default function BlogPost() {
   if (loading) {
     return (
       <PageTransition>
-        <SEOHead title="Loading..." description="Loading article..." path={`/blog/${slug}`} />
+        <SEOHead 
+  title={post.title} 
+  description={post.excerpt} 
+  path={`/blog/${post.slug.current}`}
+  image={post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : "https://www.1stbioresonanceistofafrica.com/og-image.jpg"}
+/>
         <div className="min-h-screen flex items-center justify-center">
           <p className="text-muted-foreground font-body">Loading article...</p>
         </div>
