@@ -47,7 +47,12 @@ const products = [
 export default function Products() {
   return (
     <PageTransition>
-      <SEOHead title="Products" description="Professional-grade NLS Meta Hunter 4025, Dual Combo Package, Remote Black Box Bundle, and Energy Trapper. Precision tools for bioresonance healers." path="/products" />
+      <SEOHead 
+  title="Products" 
+  description="Professional-grade NLS Meta Hunter 4025, Dual Combo Package, Remote Black Box Bundle, and Energy Trapper. Precision tools for bioresonance healers." 
+  path="/products"
+  image="https://www.1stbioresonanceistofafrica.com/og-products.jpg"
+/>
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
