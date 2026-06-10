@@ -277,7 +277,12 @@ export default function Training() {
 
   return (
     <PageTransition>
-      <SEOHead title="Training Program — Become a Gen-B Healer" description="Training program for aspiring bioresonanceists." path="/training" />
+      <SEOHead 
+  title="Training Program — Become a Gen-B Healer" 
+  description="Training program for aspiring bioresonanceists. Learn bioresonance frequency medicine from the 1st Bioresonanceist of Africa©." 
+  path="/training"
+  image="https://www.1stbioresonanceistofafrica.com/og-training.jpg"
+/>
 
       <section className="bg-navy pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0">
