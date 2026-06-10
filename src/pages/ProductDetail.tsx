@@ -109,11 +109,13 @@ export default function ProductDetail() {
                   <ShoppingCart size={20} />
                   
                     href={`https://wa.me/2348033030614?text=Hi%2C%20I%27m%20interested%20in%20ordering%20the%20${encodeURIComponent(product.name)}%20for%20${encodeURIComponent(product.price)}.%20Please%20confirm%20availability.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Order Now — {product.price}
-                  </a>
+  target="_blank"
+  rel="noopener noreferrer"
+  className="btn-accent-brand w-full text-center text-lg flex items-center justify-center gap-3"
+>
+  <ShoppingCart size={20} />
+  Order Now — {product.price}
+</a>
                 </button>
 
                 <div className="mt-6 flex items-center justify-center gap-6">
