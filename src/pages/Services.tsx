@@ -75,7 +75,12 @@ export default function Services() {
 
   return (
     <PageTransition>
-      <SEOHead title="Services" description="100+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." path="/services" />
+      <SEOHead 
+  title="Services" 
+  description="100+ conditions treated with bioresonance frequency medicine. No surgery, no drugs, no chemicals. Non-invasive root-cause healing." 
+  path="/services"
+  image="https://www.1stbioresonanceistofafrica.com/og-services.jpg"
+/>
 
       {/* HERO */}
       <section className="bg-navy pt-32 pb-20">
