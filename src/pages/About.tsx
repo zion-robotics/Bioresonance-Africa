@@ -8,7 +8,7 @@ import clinicImg from "@/assets/clinic.jpeg";
 export default function About() {
   return (
     <PageTransition>
-      <SEOHead title="About" description="Learn about Bionic© and Biopita© — Africa's first bioresonance medical brand founded by Oludele SKO, the 1st Bioresonanceist of Africa©." path="/about" />
+      <SEOHead title="About" description="Learn about Bionic© and Biopita© ,Africa's first bioresonance medical brand founded by Oludele SKO, the 1st Bioresonanceist of Africa©." path="/about" image="https://www.1stbioresonanceistofafrica.com/og-about.jpg" />
       {/* Hero */}
       <section className="bg-navy pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -157,7 +157,7 @@ export default function About() {
             <Layers className="text-gold mx-auto mb-6" size={40} />
             <h2 className="heading-display text-3xl md:text-4xl text-navy-foreground mb-6">Strategic Positioning</h2>
             <p className="text-navy-foreground/60 font-body text-lg leading-relaxed">
-              Bionic© and Biopita© form a unified ecosystem — one delivering precision at the individual level, the other providing structured capacity at scale — both committed to eliminating root causes and redefining the future of medicine.
+              Bionic© and Biopita© form a unified ecosystem, one delivering precision at the individual level, the other providing structured capacity at scale — both committed to eliminating root causes and redefining the future of medicine.
             </p>
           </ScrollReveal>
         </div>
