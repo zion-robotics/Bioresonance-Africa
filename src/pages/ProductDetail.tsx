@@ -67,9 +67,9 @@ export default function ProductDetail() {
 
   return (
     <PageTransition>
-      <SEOHead 
-        title={product.name} 
-        description={product.desc} 
+      <SEOHead
+        title={product.name}
+        description={product.desc}
         path={`/products/${id}`}
         image={product.ogImage}
       />
@@ -105,16 +105,15 @@ export default function ProductDetail() {
                   ))}
                 </div>
 
-                <button className="btn-accent-brand w-full text-center text-lg flex items-center justify-center gap-3">
+                <a
+                  href={`https://wa.me/2348033030614?text=Hi%2C%20I%27m%20interested%20in%20ordering%20the%20${encodeURIComponent(product.name)}%20for%20${encodeURIComponent(product.price)}.%20Please%20confirm%20availability.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-accent-brand w-full text-center text-lg flex items-center justify-center gap-3"
+                >
                   <ShoppingCart size={20} />
-                  
-                    href={`https://wa.me/2348033030614?text=Hi%2C%20I%27m%20interested%20in%20ordering%20the%20${encodeURIComponent(product.name)}%20for%20${encodeURIComponent(product.price)}.%20Please%20confirm%20availability.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Order Now — {product.price}
-                  </a>
-                </button>
+                  Order Now {"\u2014"} {product.price}
+                </a>
 
                 <div className="mt-6 flex items-center justify-center gap-6">
                   {[
