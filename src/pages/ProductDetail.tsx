@@ -8,30 +8,32 @@ import metaHunter from "@/assets/meta_hunter.jpeg";
 import blackBox from "@/assets/black_box.jpeg";
 import energyTrapper from "@/assets/energy_trapper.jpeg";
 
-const productData: Record<string, { name: string; price: string; image: string; desc: string; features: string[] }> = {
+const productData: Record<string, { name: string; price: string; image: string; ogImage: string; desc: string; features: string[] }> = {
   "meta-hunter-4025": {
     name: "Original NLS Meta Hunter 4025",
     price: "₦1,800,000",
     image: metaHunter,
+    ogImage: "https://www.1stbioresonanceistofafrica.com/og-product-meta-hunter.jpg",
     desc: "The premium standalone NLS diagnostic device. Full frequency blast technology. The original toolset of the Bioresonanceists that distinguishes the pros and empowers the Gen-B healers.",
     features: ["Full frequency blast technology", "Professional-grade NLS diagnostics", "Comprehensive body scanning", "Precision frequency delivery"],
   },
   "dual-combo": {
-  name: "Dual Combo Package",
-  price: "₦2,400,000",
-  image: metaHunter,
-  desc: "The ultimate professional package combo. Complete solution for local and remote bioresonance diagnostics and treatment.",
-  features: [
-    "Includes Original NLS Meta Hunter 4025",
-    
-    "Complete local and remote diagnostic solution",
-    "Cross-border treatment capability",
-  ],
-},
+    name: "Dual Combo Package",
+    price: "₦2,400,000",
+    image: metaHunter,
+    ogImage: "https://www.1stbioresonanceistofafrica.com/og-product-meta-hunter.jpg",
+    desc: "The ultimate professional package combo. Complete solution for local and remote bioresonance diagnostics and treatment.",
+    features: [
+      "Includes Original NLS Meta Hunter 4025",
+      "Complete local and remote diagnostic solution",
+      "Cross-border treatment capability",
+    ],
+  },
   "meta-hunter-bundle": {
     name: "Remote Black Box",
     price: "₦800,000",
     image: blackBox,
+    ogImage: "https://www.1stbioresonanceistofafrica.com/og-product-black-box.jpg",
     desc: "A transformative device for all brands of NLS. Transforming a localised NLS device and medical services into a remote diagnostic scanner for trans-border treatment.",
     features: ["Remote Black Box for distance healing", "Cross-border treatment capability", "Professional headphones included"],
   },
@@ -39,6 +41,7 @@ const productData: Record<string, { name: string; price: string; image: string; 
     name: "Energy Trapper",
     price: "₦25,000",
     image: energyTrapper,
+    ogImage: "https://www.1stbioresonanceistofafrica.com/og-product-energy-trapper.jpg",
     desc: "A frequency concentration product. The exclusive toolset of the 1st Bioresonanceist of Africa©. Compatible with all brands of NLS. Not sold anywhere else.",
     features: ["Frequency concentration technology", "Compatible with all NLS brands", "Exclusive to the 1st Bioresonanceist of Africa©", "Portable and easy to use"],
   },
@@ -64,7 +67,12 @@ export default function ProductDetail() {
 
   return (
     <PageTransition>
-      <SEOHead title={product.name} description={product.desc} path={`/products/${id}`} />
+      <SEOHead 
+        title={product.name} 
+        description={product.desc} 
+        path={`/products/${id}`}
+        image={product.ogImage}
+      />
       <section className="bg-navy pt-32 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/products" className="inline-flex items-center gap-2 text-navy-foreground/60 hover:text-gold transition-colors font-body text-sm">
@@ -99,9 +107,9 @@ export default function ProductDetail() {
 
                 <button className="btn-accent-brand w-full text-center text-lg flex items-center justify-center gap-3">
                   <ShoppingCart size={20} />
-                  <a 
+                  
                     href={`https://wa.me/2348033030614?text=Hi%2C%20I%27m%20interested%20in%20ordering%20the%20${encodeURIComponent(product.name)}%20for%20${encodeURIComponent(product.price)}.%20Please%20confirm%20availability.`}
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     Order Now — {product.price}
