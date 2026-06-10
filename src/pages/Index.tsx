@@ -143,11 +143,12 @@ export default function Index() {
 
   return (
     <PageTransition>
-      <SEOHead
-        title="Bioresonance Africa — The Holy Grail of Healing© | Bionic© & Biopita©"
-        description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 100+ conditions treated with digital frequency medicine by Oludele SKO."
-        path="/"
-      />
+    <SEOHead
+  title="Bioresonance Africa — The Holy Grail of Healing© | Bionic© & Biopita©"
+  description="Beyond Drugs. Beyond Surgery. Africa's first bioresonance medical brand. 100+ conditions treated with digital frequency medicine by Oludele SKO."
+  path="/"
+  image="https://www.1stbioresonanceistofafrica.com/og-image.jpg"
+/>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center bg-navy overflow-hidden">
         {/* Background image */}
