@@ -48,12 +48,7 @@ export default function BlogPost() {
   if (loading) {
     return (
       <PageTransition>
-        <SEOHead 
-  title={post.title} 
-  description={post.excerpt} 
-  path={`/blog/${post.slug.current}`}
-  image={post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : "https://www.1stbioresonanceistofafrica.com/og-image.jpg"}
-/>
+        <SEOHead title="Loading..." description="Loading article..." path={`/blog/${slug}`} />
         <div className="min-h-screen flex items-center justify-center">
           <p className="text-muted-foreground font-body">Loading article...</p>
         </div>
@@ -77,7 +72,12 @@ export default function BlogPost() {
 
   return (
     <PageTransition>
-      <SEOHead title={post.title} description={post.excerpt} path={`/blog/${post.slug.current}`} />
+      <SEOHead
+        title={post.title}
+        description={post.excerpt}
+        path={`/blog/${post.slug.current}`}
+        image={post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : "https://www.1stbioresonanceistofafrica.com/og-image.jpg"}
+      />
       <section className="bg-navy pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/blog" className="inline-flex items-center gap-2 text-navy-foreground/60 hover:text-gold transition-colors font-body text-sm mb-8">
