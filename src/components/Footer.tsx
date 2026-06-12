@@ -109,7 +109,8 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-navy-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-navy-foreground/40 font-body text-center md:text-left">
-            © {new Date().getFullYear()} Bioresonance Africa. Bionic© and Biopita© All rights reserved. Founded by Oludele Sunday Kolawole Olumide (aka Oludele SKO) — 1st Bioresonanceist of Africa©
+            © {new Date().getFullYear()}  Health seekers are survivors© not patients.
+You are on the official website of the renewed Bioresonance, the Holy Grail of Healing© with Bionic© and Biopita© healthcare facilities concepts. This is the project of the Holy Spirit through Oludele Sunday Kolawole Olumide (aka Oludele SKO), the 1st Bioresonanceist© of Africa. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a href="https://wa.me/2348033030614" target="_blank" rel="noopener noreferrer" className="text-navy-foreground/40 hover:text-gold transition-colors text-xs">WhatsApp</a>
