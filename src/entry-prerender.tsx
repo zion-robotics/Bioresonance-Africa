@@ -30,7 +30,7 @@ export async function prerender(data: { url: string }) {
   return {
     html,
     head: {
-      title: helmet?.title?.toString() ?? "",
+      title: (helmet?.title?.toString() ?? "").replace(/<[^>]*>/g, "").trim(),
       elements,
     },
   };
