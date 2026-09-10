@@ -23,8 +23,8 @@ export async function prerender(data: { url: string }) {
   };
 
   const elements = new Set([
-    ...(helmet?.meta?.toComponent() ?? []),
-    ...(helmet?.link?.toComponent() ?? []),
+    helmet?.meta?.toString() ?? "",
+    helmet?.link?.toString() ?? "",
   ]);
 
   return {
