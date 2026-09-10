@@ -17,15 +17,17 @@ export async function prerender(data: { url: string }) {
   const { helmet } = helmetContext as {
     helmet: {
       title: { toString(): string };
-      meta: { toComponent(): React.ReactElement[] };
-      link: { toComponent(): React.ReactElement[] };
+      meta: { toString(): string };
+      link: { toString(): string };
     };
   };
 
-  const elements = new Set([
-    helmet?.meta?.toString() ?? "",
-    helmet?.link?.toString() ?? "",
-  ]);
+  const metaString = helmet?.meta?.toString() ?? "";
+  const linkString = helmet?.link?.toString() ?? "";
+
+  const elements = new Set(
+    [metaString, linkString].filter(Boolean)
+  );
 
   return {
     html,
